@@ -68,7 +68,7 @@ const injectScript = `${baseUrl}/cusdis-inject.js`;
 	}
 	.thread-frame {
 		border: 1px solid var(--border-color);
-		background: rgba(0, 20, 0, 0.35);
+		background: #000;
 		border-radius: 6px;
 		box-shadow: 0 0 0 1px rgba(0, 255, 65, 0.05) inset, 0 4px 12px rgba(0, 0, 0, 0.6);
 	}
@@ -115,7 +115,8 @@ const injectScript = `${baseUrl}/cusdis-inject.js`;
 		min-height: 500px;
 		display: block;
 		overflow: visible;
-		filter: hue-rotate(80deg) saturate(0.85) brightness(1.02);
+		background: #000;
+		filter: grayscale(1) sepia(1) hue-rotate(90deg) saturate(4) brightness(0.8) contrast(1.15);
 	}
 	:global(#cusdis_thread iframe) {
 		width: 100% !important;
