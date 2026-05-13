@@ -31,24 +31,22 @@ const lastUpdatedLabel = lang === 'pt' ? 'Atualizado em' : 'Last updated on';
 			.hero-image img {
 				display: block;
 				margin: 0 auto;
-				border-radius: 20px;
-				box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+				border: 1px solid var(--matrix-green);
+				box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
+				filter: sepia(100%) hue-rotate(80deg) saturate(400%) contrast(1.2);
 			}
 			.prose {
 				width: 720px;
 				max-width: calc(100% - 2em);
 				margin: auto;
 				padding: 3em 2em;
-				color: var(--text-muted);
-				background: var(--bg-glass);
-				backdrop-filter: blur(12px);
-				-webkit-backdrop-filter: blur(12px);
-				border: 1px solid var(--border-glass);
-				border-radius: 24px;
+				color: var(--text-main);
+				background: var(--bg-main);
+				border: 1px solid var(--border-color);
 				margin-top: -3em;
 				position: relative;
 				z-index: 2;
-				box-shadow: var(--box-shadow);
+				box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
 			}
 			.title {
 				margin-bottom: 2em;
@@ -62,8 +60,8 @@ const lastUpdatedLabel = lang === 'pt' ? 'Atualizado em' : 'Last updated on';
 			}
 			.date {
 				margin-bottom: 1em;
-				color: var(--accent-light);
-				font-weight: 500;
+				color: var(--matrix-dark-green);
+				font-weight: bold;
 				display: flex;
 				justify-content: center;
 				align-items: center;
@@ -104,7 +102,7 @@ const lastUpdatedLabel = lang === 'pt' ? 'Atualizado em' : 'Last updated on';
 								)
 							}
 						</div>
-						<h1 class="gradient-text">{title}</h1>
+						<h1 class="terminal-text">> {title}</h1>
 						<hr />
 					</div>
 					<slot />
