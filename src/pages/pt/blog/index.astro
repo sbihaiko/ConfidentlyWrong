@@ -7,15 +7,15 @@ import FormattedDate from '../../../components/FormattedDate.astro';
 import Header from '../../../components/Header.astro';
 import { BASE, SITE_DESCRIPTION, SITE_TITLE } from '../../../consts';
 
-const posts = (await getCollection('blogEn')).sort(
+const posts = (await getCollection('blogPt')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION.en} />
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION.pt} />
 		<style>
 			main {
 				width: 960px;
@@ -87,20 +87,20 @@ const posts = (await getCollection('blogEn')).sort(
 		</style>
 	</head>
 	<body>
-		<Header lang="en" translationHref={`${BASE}/blog/`} />
+		<Header lang="pt" translationHref={`${BASE}/blog/`} />
 		<main>
 			<section>
 				<ul>
 					{
 						posts.map((post) => (
 							<li>
-								<a href={`${BASE}/en/blog/${post.id}/`}>
+								<a href={`${BASE}/pt/blog/${post.id}/`}>
 									{post.data.heroImage && (
 										<Image width={720} height={360} src={post.data.heroImage as any} alt="" />
 									)}
 									<h4 class="title">{post.data.title}</h4>
 									<p class="date">
-										<FormattedDate date={post.data.pubDate} lang="en" />
+										<FormattedDate date={post.data.pubDate} lang="pt" />
 									</p>
 								</a>
 							</li>

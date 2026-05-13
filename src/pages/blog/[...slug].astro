@@ -4,18 +4,18 @@ import { BASE } from '../../consts';
 import BlogPost from '../../layouts/BlogPost.astro';
 
 export async function getStaticPaths() {
-	const posts = await getCollection('blogPt');
+	const posts = await getCollection('blogEn');
 	return posts.map((post) => ({
 		params: { slug: post.id },
 		props: post,
 	}));
 }
-type Props = CollectionEntry<'blogPt'>;
+type Props = CollectionEntry<'blogEn'>;
 
 const post = Astro.props;
 const { Content } = await render(post);
 ---
 
-<BlogPost {...post.data} lang="pt" translationHref={`${BASE}/en/blog/${post.id}/`}>
+<BlogPost {...post.data} lang="en" translationHref={`${BASE}/pt/blog/${post.id}/`}>
 	<Content />
 </BlogPost>

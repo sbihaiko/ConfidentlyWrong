@@ -6,16 +6,16 @@ import { BASE, SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 ---
 
 <!doctype html>
-<html lang="pt-BR">
+<html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION.pt} />
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION.en} />
 	</head>
 	<body>
-		<Header lang="pt" />
+		<Header lang="en" />
 		<main>
 			<h1>Confidently Wrong</h1>
-			<p>{SITE_DESCRIPTION.pt}</p>
-			<p><a href={`${BASE}/blog`}>Ver artigos →</a></p>
+			<p>{SITE_DESCRIPTION.en}</p>
+			<p><a href={`${BASE}/blog`}>Read articles →</a></p>
 		</main>
 		<Footer />
 	</body>

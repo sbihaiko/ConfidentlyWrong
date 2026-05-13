@@ -10,8 +10,8 @@ export default defineConfig({
 	base: '/ConfidentlyWrong',
 	integrations: [mdx(), sitemap()],
 	i18n: {
-		defaultLocale: 'pt',
-		locales: ['pt', 'en'],
+		defaultLocale: 'en',
+		locales: ['en', 'pt'],
 		routing: { prefixDefaultLocale: false },
 	},
 	fonts: [

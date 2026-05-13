@@ -7,15 +7,15 @@ import FormattedDate from '../../components/FormattedDate.astro';
 import Header from '../../components/Header.astro';
 import { BASE, SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
 
-const posts = (await getCollection('blogPt')).sort(
+const posts = (await getCollection('blogEn')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 ---
 
 <!doctype html>
-<html lang="pt-BR">
+<html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION.pt} />
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION.en} />
 		<style>
 			main {
 				width: 960px;
@@ -87,7 +87,7 @@ const posts = (await getCollection('blogPt')).sort(
 		</style>
 	</head>
 	<body>
-		<Header lang="pt" translationHref={`${BASE}/en/blog/`} />
+		<Header lang="en" translationHref={`${BASE}/pt/blog/`} />
 		<main>
 			<section>
 				<ul>
@@ -100,7 +100,7 @@ const posts = (await getCollection('blogPt')).sort(
 									)}
 									<h4 class="title">{post.data.title}</h4>
 									<p class="date">
-										<FormattedDate date={post.data.pubDate} lang="pt" />
+										<FormattedDate date={post.data.pubDate} lang="en" />
 									</p>
 								</a>
 							</li>
