@@ -15,29 +15,23 @@ const otherLang = isPt ? 'EN' : 'PT';
 const otherHref = translationHref ?? (isPt ? `${BASE}/` : `${BASE}/pt/`);
 ---
 
-<header class="glass-panel-header">
+<header class="terminal-header">
 	<nav>
-		<h2><a href={isPt ? `${BASE}/pt/` : `${BASE}/`} class="gradient-text site-title">{SITE_TITLE}</a></h2>
+		<h2><a href={isPt ? `${BASE}/pt/` : `${BASE}/`} class="terminal-site-title">root@{SITE_TITLE}:~#</a></h2>
 		<div class="internal-links">
-			<HeaderLink href={`${base}/`}>{!isPt ? 'Home' : 'Início'}</HeaderLink>
-			<HeaderLink href={`${base}/blog`}>Blog</HeaderLink>
-			<HeaderLink href={`${base}/about`}>{!isPt ? 'About' : 'Sobre'}</HeaderLink>
+			<HeaderLink href={`${base}/`}>./{!isPt ? 'home' : 'inicio'}</HeaderLink>
+			<HeaderLink href={`${base}/blog`}>./blog</HeaderLink>
+			<HeaderLink href={`${base}/about`}>./{!isPt ? 'about' : 'sobre'}</HeaderLink>
 		</div>
 		<div class="right-links">
-			<a href={otherHref} class="lang-switch">{otherLang}</a>
+			<a href={otherHref} class="lang-switch">LANG={otherLang}</a>
 		</div>
 	</nav>
 </header>
 <style>
-	.glass-panel-header {
-		background: rgba(15, 23, 42, 0.7);
-		backdrop-filter: blur(12px);
-		-webkit-backdrop-filter: blur(12px);
-		border-bottom: 1px solid var(--border-glass);
-		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-	}
-	header {
-		margin: 0;
+	.terminal-header {
+		background: var(--bg-main);
+		border-bottom: 1px dashed var(--matrix-green);
 		padding: 1em 2em;
 		position: sticky;
 		top: 0;
@@ -45,16 +39,17 @@ const otherHref = translationHref ?? (isPt ? `${BASE}/` : `${BASE}/pt/`);
 	}
 	h2 {
 		margin: 0;
-		font-size: 1.4em;
-		font-weight: 800;
+		font-size: 1.2em;
+		font-weight: bold;
 	}
 	h2 a {
 		text-decoration: none;
-		display: inline-block;
-		transition: transform 0.2s;
+		color: var(--text-main);
 	}
 	h2 a:hover {
-		transform: scale(1.02);
+		background: transparent;
+		color: #fff;
+		text-shadow: 0 0 8px var(--matrix-green);
 	}
 	nav {
 		display: flex;
@@ -67,56 +62,32 @@ const otherHref = translationHref ?? (isPt ? `${BASE}/` : `${BASE}/pt/`);
 		display: flex;
 		gap: 1.5em;
 	}
-	nav a:not(.site-title):not(.lang-switch) {
-		padding: 0.5em;
-		color: var(--text-muted);
+	nav a:not(.terminal-site-title) {
+		padding: 0.2em 0.5em;
+		color: var(--matrix-green);
 		text-decoration: none;
-		font-weight: 600;
-		position: relative;
-		transition: color 0.3s ease;
+		font-weight: bold;
+		transition: all 0.2s ease;
 	}
-	nav a:not(.site-title):not(.lang-switch)::after {
-		content: '';
-		position: absolute;
-		width: 0;
-		height: 2px;
-		bottom: 0;
-		left: 0;
-		background-color: var(--accent);
-		transition: width 0.3s ease;
-		border-radius: 2px;
-	}
-	nav a:not(.site-title):not(.lang-switch):hover {
-		color: var(--text-main);
-	}
-	nav a:not(.site-title):not(.lang-switch):hover::after,
-	nav a.active::after {
-		width: 100%;
-	}
+	nav a:not(.terminal-site-title):hover,
 	nav a.active {
-		color: var(--text-main);
+		background-color: var(--matrix-green);
+		color: var(--bg-main);
 	}
 	.right-links {
 		display: flex;
 		align-items: center;
 	}
 	.lang-switch {
-		font-size: 0.85em;
+		font-size: 0.9em;
 		font-weight: 700;
-		padding: 0.4em 1em;
-		border-radius: 20px;
-		background: rgba(139, 92, 246, 0.1);
-		border: 1px solid rgba(139, 92, 246, 0.3);
-		color: var(--accent-light) !important;
-		transition: all 0.3s ease;
-		text-decoration: none;
+		padding: 0.2em 0.5em;
+		border: 1px solid var(--matrix-green);
+		color: var(--matrix-green);
 	}
 	.lang-switch:hover {
-		background: rgba(139, 92, 246, 0.3);
-		border-color: rgba(139, 92, 246, 0.5);
-		color: #fff !important;
-		box-shadow: 0 0 15px rgba(139, 92, 246, 0.4);
-		text-shadow: none;
+		background-color: var(--matrix-green);
+		color: var(--bg-main);
 	}
 	@media (max-width: 720px) {
 		.right-links {

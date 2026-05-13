@@ -20,11 +20,10 @@ const posts = (await getCollection('blogEn'))
 				margin-bottom: 4rem;
 				text-align: center;
 				padding: 4rem 2rem;
-				border-radius: 24px;
 			}
 			.subtitle {
 				font-size: 1.2rem;
-				color: var(--text-muted);
+				color: var(--matrix-dark-green);
 				max-width: 600px;
 				margin: 1.5rem auto 0;
 			}
@@ -53,16 +52,17 @@ const posts = (await getCollection('blogEn'))
 			}
 			.post-title {
 				font-size: 1.4rem;
-				font-weight: 700;
+				font-weight: bold;
 				color: var(--text-main);
-				transition: color 0.3s ease;
 			}
-			.post-list li a:hover .post-title {
-				color: var(--accent-light);
+			.post-list li a:hover .post-title,
+			.post-list li a:hover .post-description,
+			.post-list li a:hover .post-date {
+				color: var(--bg-main);
 			}
 			.post-date {
 				font-size: 0.9rem;
-				color: var(--text-muted);
+				color: var(--matrix-dark-green);
 				display: flex;
 				align-items: center;
 				gap: 0.5rem;
@@ -70,7 +70,7 @@ const posts = (await getCollection('blogEn'))
 			}
 			.post-description {
 				font-size: 1rem;
-				color: var(--text-muted);
+				color: var(--matrix-green);
 				margin: 0.5rem 0 1rem;
 				line-height: 1.6;
 			}
@@ -80,41 +80,35 @@ const posts = (await getCollection('blogEn'))
 				justify-content: center;
 				gap: 0.8rem;
 				margin-top: 3rem;
-				font-weight: 600;
+				font-weight: bold;
 				padding: 1rem 2rem;
-				background: rgba(30, 41, 59, 0.5);
-				backdrop-filter: blur(8px);
-				-webkit-backdrop-filter: blur(8px);
-				border: 1px solid var(--border-glass);
-				border-radius: 30px;
+				background: transparent;
+				border: 1px solid var(--matrix-green);
 				color: var(--text-main);
 				text-decoration: none;
-				transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+				transition: all 0.2s;
 			}
 			.all-articles:hover {
-				background: rgba(139, 92, 246, 0.2);
-				border-color: rgba(139, 92, 246, 0.4);
-				transform: translateY(-2px);
-				box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-				color: #fff;
+				background: var(--matrix-green);
+				color: var(--bg-main);
 			}
 		</style>
 	</head>
 	<body>
 		<Header lang="en" />
 		<main>
-			<div class="hero glass-panel">
-				<h1 class="gradient-text">Confidently Wrong</h1>
+			<div class="hero terminal-panel">
+				<h1 class="terminal-text">> Confidently Wrong</h1>
 				<p class="subtitle">{SITE_DESCRIPTION.en}</p>
 			</div>
 			
-			<h3 style="margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-glass); padding-bottom: 0.5rem;">Recent Posts</h3>
+			<h3 style="margin-bottom: 1.5rem; border-bottom: 1px dashed var(--matrix-green); padding-bottom: 0.5rem;">> ./recent-posts</h3>
 			
 			<ul class="post-list">
 				{posts.map((post) => (
 					<li>
-						<a href={`${BASE}/blog/${post.id}/`} class="glass-card">
-							<span class="post-title">{post.data.title}</span>
+						<a href={`${BASE}/blog/${post.id}/`} class="terminal-card">
+							<span class="post-title">> {post.data.title}</span>
 							<span class="post-description">{post.data.description}</span>
 							<span class="post-date"><FormattedDate date={post.data.pubDate} lang="en" /></span>
 						</a>
@@ -123,8 +117,7 @@ const posts = (await getCollection('blogEn'))
 			</ul>
 			<div style="text-align: center;">
 				<a href={`${BASE}/blog`} class="all-articles">
-					Read all articles 
-					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+					> cat all_articles.txt
 				</a>
 			</div>
 		</main>
