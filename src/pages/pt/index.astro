@@ -1,21 +1,80 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
 import Header from '../../components/Header.astro';
 import { BASE, SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+
+const posts = (await getCollection('blogPt'))
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.slice(0, 5);
 ---
 
 <!doctype html>
 <html lang="pt-BR">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION.pt} />
+		<style>
+			.hero {
+				margin-bottom: 2rem;
+			}
+			.post-list {
+				list-style: none;
+				padding: 0;
+				margin: 2rem 0;
+				display: flex;
+				flex-direction: column;
+				gap: 1.2rem;
+			}
+			.post-list li a {
+				display: flex;
+				justify-content: space-between;
+				align-items: baseline;
+				gap: 1rem;
+				text-decoration: none;
+				color: inherit;
+				border-bottom: 1px solid rgb(var(--gray-light));
+				padding-bottom: 0.8rem;
+			}
+			.post-list li a:hover .post-title {
+				color: rgb(var(--accent));
+			}
+			.post-title {
+				font-size: 1.1rem;
+				font-weight: 600;
+				transition: color 0.2s;
+			}
+			.post-date {
+				font-size: 0.85rem;
+				color: rgb(var(--gray));
+				white-space: nowrap;
+			}
+			.all-articles {
+				display: inline-block;
+				margin-top: 0.5rem;
+				font-weight: 600;
+			}
+		</style>
 	</head>
 	<body>
 		<Header lang="pt" />
 		<main>
-			<h1>Confidently Wrong</h1>
-			<p>{SITE_DESCRIPTION.pt}</p>
-			<p><a href={`${BASE}/pt/blog`}>Ver artigos →</a></p>
+			<div class="hero">
+				<h1>Confidently Wrong</h1>
+				<p>{SITE_DESCRIPTION.pt}</p>
+			</div>
+			<ul class="post-list">
+				{posts.map((post) => (
+					<li>
+						<a href={`${BASE}/pt/blog/${post.id}/`}>
+							<span class="post-title">{post.data.title}</span>
+							<span class="post-date"><FormattedDate date={post.data.pubDate} lang="pt" /></span>
+						</a>
+					</li>
+				))}
+			</ul>
+			<a href={`${BASE}/pt/blog`} class="all-articles">Ver todos os artigos →</a>
 		</main>
 		<Footer lang="pt" />
 	</body>
