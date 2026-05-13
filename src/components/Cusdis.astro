@@ -8,20 +8,51 @@ interface Props {
 
 const { pageId, pageUrl, pageTitle, lang = 'en' } = Astro.props;
 const heading = lang === 'pt' ? '> ./comentarios' : '> ./comments';
+const loadingLabel = lang === 'pt' ? '$ loading discussion…' : '$ loading discussion…';
+const noscriptLabel = lang === 'pt'
+	? 'Comentários precisam de JavaScript ativo.'
+	: 'Comments require JavaScript.';
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
+const injectScript = `${baseUrl}/cusdis-inject.js`;
 ---
 
 <section class="comments-section">
 	<h2 class="terminal-text">{heading}</h2>
-	<div
-		id="cusdis_thread"
-		data-host="https://cusdis.com"
-		data-app-id="0da35e72-68a9-44bd-8fca-48e0094fcbd6"
-		data-page-id={pageId}
-		data-page-url={pageUrl}
-		data-page-title={pageTitle}
-		data-theme="dark"
-	></div>
-	<script async src="https://cusdis.com/js/cusdis.es.js"></script>
+
+	<div class="thread-frame">
+		<div class="thread-frame__banner">
+			<span class="thread-frame__corner">┌─</span>
+			<span class="thread-frame__title">[ THREAD.LOG ]</span>
+			<span class="thread-frame__corner">─┐</span>
+		</div>
+
+		<div class="thread-frame__body">
+			<noscript>
+				<p class="thread-frame__noscript">{noscriptLabel}</p>
+			</noscript>
+
+			<div class="thread-frame__loading" aria-hidden="true">{loadingLabel}</div>
+
+			<div
+				id="cusdis_thread"
+				data-host="https://cusdis.com"
+				data-app-id="0da35e72-68a9-44bd-8fca-48e0094fcbd6"
+				data-page-id={pageId}
+				data-page-url={pageUrl}
+				data-page-title={pageTitle}
+				data-theme="dark"
+			></div>
+		</div>
+
+		<div class="thread-frame__banner thread-frame__banner--bottom">
+			<span class="thread-frame__corner">└─</span>
+			<span class="thread-frame__title">[ EOF ]</span>
+			<span class="thread-frame__corner">─┘</span>
+		</div>
+	</div>
+
+	<script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+	<script src={injectScript} defer></script>
 </section>
 
 <style>
@@ -30,22 +61,70 @@ const heading = lang === 'pt' ? '> ./comentarios' : '> ./comments';
 		max-width: calc(100% - 2em);
 		margin: 2em auto 4em;
 	}
-	#cusdis_thread {
-		margin-top: 1em;
-		width: 100%;
-		min-height: 600px;
-		display: block;
-		overflow: visible;
-	}
-	:global(#cusdis_thread iframe) {
-		width: 100% !important;
-		min-height: 600px;
-		border: 0;
-		display: block;
-	}
 	.comments-section h2 {
 		margin: 0 0 1.5em 0;
 		color: var(--text-heading);
 		font-size: 1.4rem;
+	}
+	.thread-frame {
+		border: 1px solid var(--border-color);
+		background: rgba(0, 20, 0, 0.35);
+		border-radius: 6px;
+		box-shadow: 0 0 0 1px rgba(0, 255, 65, 0.05) inset, 0 4px 12px rgba(0, 0, 0, 0.6);
+	}
+	.thread-frame__banner {
+		display: flex;
+		align-items: center;
+		gap: 0.5em;
+		padding: 0.6em 1em;
+		font-family: var(--font-mono);
+		font-size: 0.85em;
+		color: var(--matrix-dark-green);
+		border-bottom: 1px dashed var(--matrix-dark-green);
+		background: rgba(0, 255, 65, 0.04);
+		user-select: none;
+	}
+	.thread-frame__banner--bottom {
+		border-top: 1px dashed var(--matrix-dark-green);
+		border-bottom: 0;
+	}
+	.thread-frame__corner {
+		color: var(--matrix-green);
+	}
+	.thread-frame__title {
+		letter-spacing: 0.1em;
+	}
+	.thread-frame__body {
+		padding: 1em 1.2em;
+		position: relative;
+	}
+	.thread-frame__loading {
+		color: var(--matrix-dark-green);
+		font-family: var(--font-mono);
+		font-size: 0.9em;
+		margin-bottom: 0.8em;
+		opacity: 0.7;
+	}
+	.thread-frame__noscript {
+		color: var(--matrix-bright);
+		text-align: center;
+		font-family: var(--font-mono);
+	}
+	#cusdis_thread {
+		width: 100%;
+		min-height: 500px;
+		display: block;
+		overflow: visible;
+		filter: hue-rotate(80deg) saturate(0.85) brightness(1.02);
+	}
+	:global(#cusdis_thread iframe) {
+		width: 100% !important;
+		min-height: 500px;
+		border: 0;
+		display: block;
+		background: transparent;
+	}
+	@media (max-width: 720px) {
+		.thread-frame__body { padding: 0.8em 0.6em; }
 	}
 </style>
