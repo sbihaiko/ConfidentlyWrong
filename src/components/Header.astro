@@ -10,14 +10,15 @@ interface Props {
 const { lang = 'pt', translationHref } = Astro.props;
 
 const isEn = lang === 'en';
-const base = isEn ? '/en' : '';
+const siteBase = import.meta.env.BASE_URL;
+const base = isEn ? `${siteBase}en` : siteBase.slice(0, -1);
 const otherLang = isEn ? 'PT' : 'EN';
-const otherHref = translationHref ?? (isEn ? '/' : '/en/');
+const otherHref = translationHref ?? (isEn ? siteBase : `${siteBase}en/`);
 ---
 
 <header>
 	<nav>
-		<h2><a href={isEn ? '/en/' : '/'}>{SITE_TITLE}</a></h2>
+		<h2><a href={isEn ? `${siteBase}en/` : siteBase}>{SITE_TITLE}</a></h2>
 		<div class="internal-links">
 			<HeaderLink href={`${base}/`}>{isEn ? 'Home' : 'Início'}</HeaderLink>
 			<HeaderLink href={`${base}/blog`}>Blog</HeaderLink>
