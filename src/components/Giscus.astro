@@ -4,9 +4,14 @@ interface Props {
 }
 const { lang = 'en' } = Astro.props;
 const giscusLang = lang === 'pt' ? 'pt' : 'en';
+const heading = lang === 'pt' ? '> ./comentarios' : '> ./comments';
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
+const fullThemeUrl = `${Astro.site?.origin ?? ''}${baseUrl}/giscus-matrix.css`;
 ---
 
-<section class="comments">
+<section class="comments-section terminal-panel">
+	<h2 class="terminal-text">{heading}</h2>
+	<div class="giscus"></div>
 	<script
 		src="https://giscus.app/client.js"
 		data-repo="sbihaiko/ConfidentlyWrong"
@@ -18,7 +23,7 @@ const giscusLang = lang === 'pt' ? 'pt' : 'en';
 		data-reactions-enabled="1"
 		data-emit-metadata="0"
 		data-input-position="top"
-		data-theme="light"
+		data-theme={fullThemeUrl}
 		data-lang={giscusLang}
 		data-loading="lazy"
 		crossorigin="anonymous"
@@ -27,10 +32,23 @@ const giscusLang = lang === 'pt' ? 'pt' : 'en';
 </section>
 
 <style>
-	.comments {
+	.comments-section {
 		width: 720px;
 		max-width: calc(100% - 2em);
-		margin: 2rem auto;
-		padding: 0 1em;
+		margin: 2em auto 4em;
+	}
+	.giscus,
+	:global(.giscus-frame) {
+		width: 100%;
+	}
+	:global(.giscus-frame) {
+		min-height: 200px;
+		border: 0;
+		color-scheme: dark;
+	}
+	.comments-section h2 {
+		margin: 0 0 1.5em 0;
+		color: var(--text-heading);
+		font-size: 1.4rem;
 	}
 </style>
