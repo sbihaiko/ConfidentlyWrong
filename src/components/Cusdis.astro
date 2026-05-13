@@ -31,11 +31,14 @@ const heading = lang === 'pt' ? '> ./comentarios' : '> ./comments';
 		box-sizing: border-box; /* Prevents padding from causing overflow */
 	}
 	#cusdis_thread {
-		/* Magic trick to turn the default white text of Cusdis dark mode into Matrix green */
-		filter: sepia(100%) hue-rotate(90deg) saturate(500%) contrast(1.1);
 		margin-top: 1em;
 		width: 100%;
 		display: block;
+		min-height: 350px;
+	}
+	/* Force minimum height on the iframe itself in case the script miscalculates it */
+	:global(#cusdis_thread iframe) {
+		min-height: 350px !important;
 	}
 	h2 {
 		margin: 0 0 1.5em 0;
