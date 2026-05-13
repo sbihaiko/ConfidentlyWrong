@@ -8,7 +8,7 @@ interface Props {
 
 const { pageId, pageUrl, pageTitle, lang = 'en' } = Astro.props;
 const heading = lang === 'pt' ? '> ./comentarios' : '> ./comments';
-const loadingLabel = lang === 'pt' ? '$ loading discussion…' : '$ loading discussion…';
+const loadingLabel = lang === 'pt' ? '$ carregando discussão…' : '$ loading discussion…';
 const noscriptLabel = lang === 'pt'
 	? 'Comentários precisam de JavaScript ativo.'
 	: 'Comments require JavaScript.';
