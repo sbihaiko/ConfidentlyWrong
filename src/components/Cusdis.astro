@@ -8,8 +8,6 @@ interface Props {
 
 const { pageId, pageUrl, pageTitle, lang = 'en' } = Astro.props;
 const heading = lang === 'pt' ? '> ./comentarios' : '> ./comments';
-const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
-const themeUrl = `${Astro.site?.origin ?? ''}${baseUrl}/cusdis-matrix.css`;
 ---
 
 <section class="comments-section">
@@ -21,7 +19,7 @@ const themeUrl = `${Astro.site?.origin ?? ''}${baseUrl}/cusdis-matrix.css`;
 		data-page-id={pageId}
 		data-page-url={pageUrl}
 		data-page-title={pageTitle}
-		data-theme={themeUrl}
+		data-theme="dark"
 	></div>
 	<script async src="https://cusdis.com/js/cusdis.es.js"></script>
 </section>
