@@ -5,7 +5,7 @@ import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
 import Header from '../../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+import { BASE, SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
 
 const posts = (await getCollection('blogPt')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
@@ -87,14 +87,14 @@ const posts = (await getCollection('blogPt')).sort(
 		</style>
 	</head>
 	<body>
-		<Header lang="pt" translationHref={`${import.meta.env.BASE_URL}en/blog/`} />
+		<Header lang="pt" translationHref={`${BASE}/en/blog/`} />
 		<main>
 			<section>
 				<ul>
 					{
 						posts.map((post) => (
 							<li>
-								<a href={`${import.meta.env.BASE_URL}blog/${post.id}/`}>
+								<a href={`${BASE}/blog/${post.id}/`}>
 									{post.data.heroImage && (
 										<Image width={720} height={360} src={post.data.heroImage as any} alt="" />
 									)}

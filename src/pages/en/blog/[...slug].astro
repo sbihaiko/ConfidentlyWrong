@@ -1,5 +1,6 @@
 ---
 import { type CollectionEntry, getCollection, render } from 'astro:content';
+import { BASE } from '../../../consts';
 import BlogPost from '../../../layouts/BlogPost.astro';
 
 export async function getStaticPaths() {
@@ -15,6 +16,6 @@ const post = Astro.props;
 const { Content } = await render(post);
 ---
 
-<BlogPost {...post.data} lang="en" translationHref={`${import.meta.env.BASE_URL}blog/${post.id}/`}>
+<BlogPost {...post.data} lang="en" translationHref={`${BASE}/blog/${post.id}/`}>
 	<Content />
 </BlogPost>

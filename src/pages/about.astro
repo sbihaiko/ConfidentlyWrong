@@ -1,65 +1,30 @@
 ---
-import AboutHeroImage from '../assets/blog-placeholder-about.jpg';
 import Layout from '../layouts/BlogPost.astro';
+import { BASE } from '../consts';
 ---
 
 <Layout
 	title="Sobre"
-	description="Sobre o blog Confidently Wrong"
-	pubDate={new Date('August 08 2021')}
-	heroImage={AboutHeroImage}
+	description="Quem escreve aqui e por quê o blog se chama Confidently Wrong"
+	pubDate={new Date('2026-05-13')}
 	lang="pt"
-	translationHref="/en/about"
+	translationHref={`${BASE}/en/about`}
 >
-	<p>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-		labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo
-		viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam
-		adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus
-		et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus
-		vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque
-		sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
-	</p>
 
-	<p>
-		Morbi tristique senectus et netus. Id semper risus in hendrerit gravida rutrum quisque non
-		tellus. Habitasse platea dictumst quisque sagittis purus sit amet. Tellus molestie nunc non
-		blandit massa. Cursus vitae congue mauris rhoncus. Accumsan tortor posuere ac ut. Fringilla urna
-		porttitor rhoncus dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis
-		massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius morbi enim nunc.
-		Bibendum neque egestas congue quisque egestas diam. Cras ornare arcu dui vivamus arcu felis
-		bibendum. Dignissim suspendisse in est ante in nibh mauris. Sed tempus urna et pharetra pharetra
-		massa massa ultricies mi.
-	</p>
+<p>Comecei a programar aos 9 anos. Sem YouTube. Sem Stack Overflow. Sem nenhum adulto responsável por perto para me avisar que aquilo ia me consumir os próximos 40 anos da vida.</p>
 
-	<p>
-		Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam sit amet nisl
-		suscipit. Lacus viverra vitae congue eu consequat ac felis donec. Egestas integer eget aliquet
-		nibh praesent tristique magna sit amet. Eget magna fermentum iaculis eu non diam. In vitae
-		turpis massa sed elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem
-		dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra. Posuere ac ut consequat
-		semper viverra nam. Laoreet suspendisse interdum consectetur libero id faucibus. Diam phasellus
-		vestibulum lorem sed risus ultricies tristique. Rhoncus dolor purus non enim praesent elementum
-		facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed risus pretium quam
-		vulputate. Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Fringilla
-		urna porttitor rhoncus dolor purus non. Amet dictum sit amet justo donec enim.
-	</p>
+<p>Sou Sandro Bihaiko, nascido em Curitiba em 1974 — sim, a mesma Curitiba dos ônibus biarticulados e das estações-tubo que aparecem no primeiro post deste blog. Cresci achando que programar era uma habilidade tão natural quanto andar de bicicleta, até descobrir que a maioria das pessoas não passa o fim de semana depurando código BASIC em um micro que esquenta mais que um forno de pizza.</p>
 
-	<p>
-		Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper
-		viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc
-		scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur
-		gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus
-		pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim
-		blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id
-		cursus metus aliquam eleifend mi.
-	</p>
+<p>Fui aprendendo sozinho. Sem diploma — cheguei a começar Engenharia Eletrônica no CEFET, mas o mercado tinha outros planos para mim. Vinte e cinco anos depois, passei por praticamente todos os papéis que existem nessa indústria: programador, analista, arquiteto, consultor, CTO. Construí o Internet Banking do HSBC e da Caixa Econômica Federal. Criei o JBanana — um framework open source MVC que foi adotado pelo HSBC e ficou entre os 3 maiores projetos open source brasileiros da época. Fui colunista da Mundo Java por três anos. Palestrei no JustJava, no TDC e em congressos de software livre.</p>
 
-	<p>
-		Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta
-		nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam
-		tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci
-		ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar
-		proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
-	</p>
+<p>Também fiz jogos. Um deles ganhou o SXSW Gamer's Voice Best Multiplayer. Outro foi premiado no LEVEL UY e no South Summit em Madri. Fiz jogos de cassino exportados para EUA, México e Canadá. Criei ferramentas para Unity3D que ficaram entre as 10 mais vendidas da Unity Store. Construí uma lousa digital baseada no controle do Wii que custava 10x menos que a concorrência — e funcionava melhor. O mercado respondeu inundando o Brasil de lousas chinesas mais baratas ainda. Timing impecável.</p>
+
+<p>Hoje moro em Florianópolis, onde o verão triplica a população e paralisa o trânsito — o que me dá tempo de sobra para escrever artigos sobre tecnologia enquanto espero o carro da frente se mover.</p>
+
+<p>Atualmente sou Co-Founder & CTO da Mutualizo (insurtech) e fundador da AIGHA (consultoria em IA). Antes disso passei pela RD Station, onde consolidei 10 anos de dados em um datalake e deixei — modéstia à parte — um time que funcionava de verdade.</p>
+
+<p>Este blog é onde coloco minhas opiniões sobre tecnologia, software, IA e o caos organizado que é construir coisas que funcionam. Aviso: tenho opiniões firmes. Às vezes estou certo. Às vezes não.</p>
+
+<p>É exatamente por isso que o blog se chama <strong>Confidently Wrong</strong>.</p>
+
 </Layout>
