@@ -14,6 +14,9 @@ type Props = (CollectionEntry<'blogPt'> | CollectionEntry<'blogEn'>)['data'] & {
 
 const { title, description, pubDate, updatedDate, heroImage, lang = 'pt', translationHref } = Astro.props;
 const lastUpdatedLabel = lang === 'pt' ? 'Atualizado em' : 'Last updated on';
+const slug = Astro.params.slug ?? Astro.url.pathname;
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
+const canonicalUrl = `${Astro.site?.origin ?? Astro.url.origin}${baseUrl}/blog/${slug}/`;
 ---
 
 <html lang={lang === 'pt' ? 'pt-BR' : 'en'}>
@@ -110,8 +113,8 @@ const lastUpdatedLabel = lang === 'pt' ? 'Atualizado em' : 'Last updated on';
 			</article>
 		</main>
 		<Cusdis
-			pageId={Astro.url.pathname}
-			pageUrl={Astro.url.href}
+			pageId={slug}
+			pageUrl={canonicalUrl}
 			pageTitle={title}
 			lang={lang}
 		/>
