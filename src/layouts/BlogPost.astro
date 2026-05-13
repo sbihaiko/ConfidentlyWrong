@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
-import Giscus from '../components/Giscus.astro';
+import Cusdis from '../components/Cusdis.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 
@@ -111,7 +111,12 @@ const lastUpdatedLabel = lang === 'pt' ? 'Atualizado em' : 'Last updated on';
 				</div>
 			</article>
 		</main>
-		<Giscus lang={lang} />
+		<Cusdis
+			pageId={Astro.url.pathname}
+			pageUrl={Astro.url.href}
+			pageTitle={title}
+			lang={lang}
+		/>
 		<Footer lang={lang} />
 	</body>
 </html>

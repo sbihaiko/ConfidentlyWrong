@@ -19,46 +19,58 @@ const text = {
 ---
 
 <footer>
-	<p>{text.copyright}</p>
-	<p class="subtext">{text.line1}</p>
-	<p class="subtext">{text.line2}</p>
-	<div class="social-links">
-		<a href="https://x.com/bihaiko" target="_blank">
-			<span class="sr-only">Sandro Bihaiko no X</span>
-			<svg viewBox="0 0 16 16" aria-hidden="true" width="24" height="24">
-				<path
-					fill="currentColor"
-					d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"
-				/>
-			</svg>
-		</a>
+	<div class="footer-content glass-panel">
+		<p>{text.copyright}</p>
+		<p class="subtext">{text.line1}</p>
+		<p class="subtext">{text.line2}</p>
+		<div class="social-links">
+			<a href="https://x.com/bihaiko" target="_blank">
+				<span class="sr-only">Sandro Bihaiko no X</span>
+				<svg viewBox="0 0 16 16" aria-hidden="true" width="24" height="24">
+					<path
+						fill="currentColor"
+						d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"
+					/>
+				</svg>
+			</a>
+		</div>
 	</div>
 </footer>
 <style>
 	footer {
-		padding: 2em 1em 6em 1em;
-		background: linear-gradient(var(--gray-gradient)) no-repeat;
-		color: rgb(var(--gray));
+		padding: 2em 1em 4em 1em;
 		text-align: center;
+		display: flex;
+		justify-content: center;
+	}
+	.footer-content {
+		padding: 2em;
+		max-width: 600px;
+		width: 100%;
+		background: rgba(30, 41, 59, 0.5);
 	}
 	p {
-		margin: 0.2em 0;
+		margin: 0.3em 0;
+		color: var(--text-main);
 	}
 	.subtext {
-		font-size: 0.8em;
-		opacity: 0.7;
+		font-size: 0.85em;
+		color: var(--text-muted);
 	}
 	.social-links {
 		display: flex;
 		justify-content: center;
 		gap: 1em;
-		margin-top: 1em;
+		margin-top: 1.5em;
 	}
 	.social-links a {
 		text-decoration: none;
-		color: rgb(var(--gray));
+		color: var(--text-muted);
+		transition: color 0.3s ease, transform 0.3s ease;
+		display: inline-block;
 	}
 	.social-links a:hover {
-		color: rgb(var(--gray-dark));
+		color: var(--accent-light);
+		transform: translateY(-3px);
 	}
 </style>
