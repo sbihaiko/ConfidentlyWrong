@@ -86,8 +86,8 @@ a:hover {
 
 .prose {
 	font-family: var(--font-sans); /* Use sans-serif for main article body for readability */
-	font-size: 1.1rem;
-	line-height: 1.8;
+	font-size: 1.3rem;
+	line-height: 1.85;
 	color: #d1f5d1; /* Even lighter green almost white for long reading */
 }
 
