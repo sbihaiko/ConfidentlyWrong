@@ -1,0 +1,128 @@
+/* Matrix terminal theme for Cusdis iframe */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #050a05 !important;
+  color: #c2ffc2 !important;
+  font-family: 'Courier New', Courier, monospace !important;
+  margin: 0;
+  padding: 0;
+}
+
+/* All text */
+p, span, label, div, li, a, h1, h2, h3, h4, h5, h6 {
+  color: #c2ffc2 !important;
+}
+
+a {
+  color: #33ff66 !important;
+  text-decoration: underline;
+}
+
+a:hover {
+  color: #00ff41 !important;
+}
+
+/* Inputs and textareas */
+input, textarea {
+  background-color: #001a00 !important;
+  color: #00ff41 !important;
+  border: 1px solid #008f11 !important;
+  border-radius: 0 !important;
+  outline: none !important;
+  font-family: 'Courier New', Courier, monospace !important;
+  padding: 6px 10px !important;
+}
+
+input:focus, textarea:focus {
+  border-color: #00ff41 !important;
+  box-shadow: 0 0 0 2px rgba(0, 255, 65, 0.2) !important;
+}
+
+input::placeholder, textarea::placeholder {
+  color: #2ea62e !important;
+}
+
+/* Buttons */
+button, [type="button"], [type="submit"] {
+  background-color: #00ff41 !important;
+  color: #050a05 !important;
+  border: 1px solid #00ff41 !important;
+  border-radius: 0 !important;
+  font-family: 'Courier New', Courier, monospace !important;
+  font-weight: bold !important;
+  cursor: pointer !important;
+  padding: 6px 16px !important;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+button:hover, [type="button"]:hover, [type="submit"]:hover {
+  background-color: #33ff66 !important;
+  border-color: #33ff66 !important;
+}
+
+button:disabled, [type="submit"]:disabled {
+  background-color: #001a00 !important;
+  color: #2ea62e !important;
+  border-color: #008f11 !important;
+  cursor: default !important;
+}
+
+/* Comment cards / list items */
+.comment, [class*="comment"], li {
+  border-bottom: 1px solid #008f11 !important;
+  background: transparent !important;
+  padding: 12px 0 !important;
+}
+
+/* Cusdis footer link */
+[class*="powered"], [class*="footer"], footer {
+  color: #2ea62e !important;
+  font-size: 0.8em !important;
+}
+
+[class*="powered"] a, footer a {
+  color: #2ea62e !important;
+}
+
+/* Avatar circles */
+[class*="avatar"] {
+  background-color: #008f11 !important;
+  color: #050a05 !important;
+}
+
+/* Reply toggle */
+[class*="reply"] button {
+  background: transparent !important;
+  color: #33ff66 !important;
+  border: 1px solid #008f11 !important;
+  font-size: 0.85em !important;
+}
+
+[class*="reply"] button:hover {
+  background: #001a00 !important;
+  border-color: #00ff41 !important;
+}
+
+/* Date / time */
+time, [class*="date"], [class*="time"] {
+  color: #2ea62e !important;
+  font-size: 0.85em !important;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  background: #001a00;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #008f11;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00ff41;
+}
