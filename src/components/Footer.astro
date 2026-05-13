@@ -1,10 +1,27 @@
 ---
+interface Props {
+	lang?: 'pt' | 'en';
+}
+const { lang = 'en' } = Astro.props;
 const today = new Date();
+
+const text = {
+	copyright: lang === 'pt'
+		? `© ${today.getFullYear()} Sandro Bihaiko. Nenhum direito reservado.`
+		: `© ${today.getFullYear()} Sandro Bihaiko. No rights reserved.`,
+	line1: lang === 'pt'
+		? '(propriedade privada é uma boa ideia)'
+		: '(private property is a good idea)',
+	line2: lang === 'pt'
+		? '(propriedade intelectual é uma péssima ideia)'
+		: '(intellectual property is a terrible idea)',
+};
 ---
 
 <footer>
-	<p>&copy; {today.getFullYear()} Sandro Bihaiko. Nenhum direito reservado.</p>
-	<p class="subtext">(propriedade privada é uma boa ideia) &nbsp;·&nbsp; (propriedade intelectual é uma péssima ideia)</p>
+	<p>{text.copyright}</p>
+	<p class="subtext">{text.line1}</p>
+	<p class="subtext">{text.line2}</p>
 	<div class="social-links">
 		<a href="https://x.com/bihaiko" target="_blank">
 			<span class="sr-only">Sandro Bihaiko no X</span>
