@@ -18,13 +18,13 @@ In the 70s and 80s, Curitiba looked like a glimpse of the future in a country st
 
 The problem with planning tomorrow to perfection is that tomorrow rarely respects the plan. Curitiba fell so deeply in love with its own model that it forgot to evolve. IPPUC, which once symbolized innovation, slowly became part of the very bureaucracy it was supposed to fight. The system saturated. The bi-articulated bus, once a symbol of speed and efficiency, became a massive tin can on wheels trapped in a flow that could no longer accommodate its own ambition.
 
-And management's response was revealing: instead of reinventing the flow, they decided to punish speed. Speed cameras set to 40 km/h spread across the city. If the infrastructure can no longer handle demand, reduce the movement until everything appears "safe."
+And management's response was revealing: instead of reinventing the flow, they decided to punish speed. Speed traps set to 40 km/h spread across the city. If the infrastructure can no longer handle the demand, reduce the movement until everything appears "safe."
 
 And here lies one of the great fallacies of modern safety: the idea that lower speed always means more protection. It's a seductive line of reasoning, but intellectually lazy. If we take that logic to its limit, we reach absolute safety: zero speed. In a completely motionless traffic jam, the risk of accidents is practically nil. Zero collisions. Zero casualties. But also zero movement, zero progress, and zero relevance. A city that doesn't move isn't safe; it's dead.
 
 In software development, many companies are repeating exactly this mistake. If you want "zero AI bugs," there's a simple and lazy solution: don't use AI. You'll have zero risk and probably zero future as well.
 
-Many organizations today have absurdly powerful engines but keep operating with processes designed for another era. Their flows are saturated by legacy bureaucracies, endless approvals, and validation models incapable of keeping pace with the new speed. These are companies trying to control power by scattering organizational "speed cameras" everywhere.
+Many organizations today have absurdly powerful engines but keep operating with processes designed for another era. Their flows are saturated by legacy bureaucracies, endless approvals, and validation models incapable of keeping pace with the new speed. These are companies trying to control power by scattering organizational speed traps everywhere.
 
 Today I live in Florianópolis, and here the urban lesson is different: control doesn't come only from limiting speed; it can also emerge from expanding the capacity of flow.
 
