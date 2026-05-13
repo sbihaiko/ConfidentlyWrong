@@ -17,64 +17,116 @@ const posts = (await getCollection('blogPt'))
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION.pt} />
 		<style>
 			.hero {
-				margin-bottom: 2rem;
+				margin-bottom: 4rem;
+				text-align: center;
+				padding: 4rem 2rem;
+				border-radius: 24px;
+			}
+			.subtitle {
+				font-size: 1.2rem;
+				color: var(--text-muted);
+				max-width: 600px;
+				margin: 1.5rem auto 0;
 			}
 			.post-list {
 				list-style: none;
 				padding: 0;
-				margin: 2rem 0;
-				display: flex;
-				flex-direction: column;
-				gap: 1.2rem;
+				margin: 0;
+				display: grid;
+				grid-template-columns: 1fr;
+				gap: 1.5rem;
+			}
+			.post-list li {
+				display: block;
 			}
 			.post-list li a {
 				display: flex;
-				justify-content: space-between;
-				align-items: baseline;
-				gap: 1rem;
+				flex-direction: column;
+				gap: 0.5rem;
+				padding: 1.8rem;
 				text-decoration: none;
 				color: inherit;
-				border-bottom: 1px solid rgb(var(--gray-light));
-				padding-bottom: 0.8rem;
-			}
-			.post-list li a:hover .post-title {
-				color: rgb(var(--accent));
+				height: 100%;
+				box-sizing: border-box;
+				position: relative;
+				overflow: hidden;
 			}
 			.post-title {
-				font-size: 1.1rem;
-				font-weight: 600;
-				transition: color 0.2s;
+				font-size: 1.4rem;
+				font-weight: 700;
+				color: var(--text-main);
+				transition: color 0.3s ease;
+			}
+			.post-list li a:hover .post-title {
+				color: var(--accent-light);
 			}
 			.post-date {
-				font-size: 0.85rem;
-				color: rgb(var(--gray));
-				white-space: nowrap;
+				font-size: 0.9rem;
+				color: var(--text-muted);
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+				margin-top: auto;
+			}
+			.post-description {
+				font-size: 1rem;
+				color: var(--text-muted);
+				margin: 0.5rem 0 1rem;
+				line-height: 1.6;
 			}
 			.all-articles {
-				display: inline-block;
-				margin-top: 0.5rem;
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				gap: 0.8rem;
+				margin-top: 3rem;
 				font-weight: 600;
+				padding: 1rem 2rem;
+				background: rgba(30, 41, 59, 0.5);
+				backdrop-filter: blur(8px);
+				-webkit-backdrop-filter: blur(8px);
+				border: 1px solid var(--border-glass);
+				border-radius: 30px;
+				color: var(--text-main);
+				text-decoration: none;
+				transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+			}
+			.all-articles:hover {
+				background: rgba(139, 92, 246, 0.2);
+				border-color: rgba(139, 92, 246, 0.4);
+				transform: translateY(-2px);
+				box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+				color: #fff;
 			}
 		</style>
 	</head>
 	<body>
 		<Header lang="pt" />
 		<main>
-			<div class="hero">
-				<h1>Errando com Convicção</h1>
-				<p>{SITE_DESCRIPTION.pt}</p>
+			<div class="hero glass-panel">
+				<h1 class="gradient-text">Errando com Convicção</h1>
+				<p class="subtitle">{SITE_DESCRIPTION.pt}</p>
 			</div>
+			
+			<h3 style="margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-glass); padding-bottom: 0.5rem;">Publicações Recentes</h3>
+
 			<ul class="post-list">
 				{posts.map((post) => (
 					<li>
-						<a href={`${BASE}/pt/blog/${post.id}/`}>
+						<a href={`${BASE}/pt/blog/${post.id}/`} class="glass-card">
 							<span class="post-title">{post.data.title}</span>
+							<span class="post-description">{post.data.description}</span>
 							<span class="post-date"><FormattedDate date={post.data.pubDate} lang="pt" /></span>
 						</a>
 					</li>
 				))}
 			</ul>
-			<a href={`${BASE}/pt/blog`} class="all-articles">Ver todos os artigos →</a>
+			<div style="text-align: center;">
+				<a href={`${BASE}/pt/blog`} class="all-articles">
+					Ver todos os artigos 
+					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+				</a>
+			</div>
 		</main>
 		<Footer lang="pt" />
 	</body>

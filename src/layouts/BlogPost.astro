@@ -31,31 +31,56 @@ const lastUpdatedLabel = lang === 'pt' ? 'Atualizado em' : 'Last updated on';
 			.hero-image img {
 				display: block;
 				margin: 0 auto;
-				border-radius: 12px;
-				box-shadow: var(--box-shadow);
+				border-radius: 20px;
+				box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
 			}
 			.prose {
 				width: 720px;
 				max-width: calc(100% - 2em);
 				margin: auto;
-				padding: 1em;
-				color: rgb(var(--gray-dark));
+				padding: 3em 2em;
+				color: var(--text-muted);
+				background: var(--bg-glass);
+				backdrop-filter: blur(12px);
+				-webkit-backdrop-filter: blur(12px);
+				border: 1px solid var(--border-glass);
+				border-radius: 24px;
+				margin-top: -3em;
+				position: relative;
+				z-index: 2;
+				box-shadow: var(--box-shadow);
 			}
 			.title {
-				margin-bottom: 1em;
+				margin-bottom: 2em;
 				padding: 1em 0;
 				text-align: center;
 				line-height: 1;
 			}
 			.title h1 {
 				margin: 0 0 0.5em 0;
+				font-size: 3em;
 			}
 			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
+				margin-bottom: 1em;
+				color: var(--accent-light);
+				font-weight: 500;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				gap: 1em;
 			}
 			.last-updated-on {
 				font-style: italic;
+				opacity: 0.8;
+			}
+			@media (max-width: 720px) {
+				.prose {
+					padding: 2em 1em;
+					margin-top: -2em;
+				}
+				.title h1 {
+					font-size: 2.2em;
+				}
 			}
 		</style>
 	</head>
@@ -79,7 +104,7 @@ const lastUpdatedLabel = lang === 'pt' ? 'Atualizado em' : 'Last updated on';
 								)
 							}
 						</div>
-						<h1>{title}</h1>
+						<h1 class="gradient-text">{title}</h1>
 						<hr />
 					</div>
 					<slot />
