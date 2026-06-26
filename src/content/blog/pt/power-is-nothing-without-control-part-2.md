@@ -70,7 +70,7 @@ Já o vibecoding tem o “charme” oposto: inércia zero, exploração instant�
 
 ## O que a gente já sabia nos anos 90
 
-Aqui a história fica deliciosa, porque nada disso é realmente novo. O pêndulo já percorreu esse arco antes. Quem viveu os anos 90 reconhece a paisagem em todos os seus detalhes. E, como diria a bruxa do Pica-Pau ao montar de novo na mesma vassoura, rumo ao mesmo tombo: “E lá vamos nós!”
+Aqui a história fica deliciosa, porque nada disso é realmente novo. O pêndulo já percorreu esse arco antes. Quem viveu os anos 90 reconhece a paisagem em todos os seus detalhes. E, como diria a bruxa do Pica-Pau ao subir em mais uma vassoura que não voa: “E lá vamos nós!”
 
 A indústria de software começou com processos pesados: o famigerado *Big Design Up Front*, a planta completa antes da primeira linha de código, herança direta do modelo cascata.
 
