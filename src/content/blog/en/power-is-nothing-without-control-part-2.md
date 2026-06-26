@@ -70,7 +70,7 @@ It's dirt cheap to change direction every five minutes. The problem is that you 
 
 ## What we already knew in the 90s
 
-Here the story gets delicious, because none of this is really new. The pendulum has already traveled this arc before. Anyone who lived through the 90s recognizes the landscape in all its details. And, as Yogi Berra would say: "It's déjà vu all over again."
+Here the story gets delicious, because none of this is really new. The pendulum has already traveled this arc before. Anyone who lived through the 90s recognizes the landscape in all its details. And, as the witch from Woody Woodpecker would say as she climbs back onto the same broom, headed for the same crash: "And away we go!"
 
 The software industry started with heavy processes: the infamous *Big Design Up Front*, the complete blueprint before the first line of code, a direct inheritance from the waterfall model.
 
@@ -216,6 +216,6 @@ Because specifying is indispensable — but verifying is what separates engineer
 - [The Agile Manifesto (2001)](https://agilemanifesto.org/)
 - [Jorge Luis Borges — "Del rigor en la ciencia" (the 1:1 scale map)](https://www.google.com/search?q=borges+del+rigor+en+la+ciencia+mapa+imperio)
 - [dev-squad — Rafael's plugin cited in the article](https://github.com/Korck-lab/dev_squad)
-- ["It's déjà vu all over again." — Yogi Berra](https://www.youtube.com/watch?v=zfOJGqC8EjY)
+- ["And away we go!" — the witch from Woody Woodpecker](https://www.youtube.com/watch?v=o8jNBRXxass)
 </content>
 </invoke>
