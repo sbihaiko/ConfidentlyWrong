@@ -216,6 +216,6 @@ Because specifying is indispensable — but verifying is what separates engineer
 - [The Agile Manifesto (2001)](https://agilemanifesto.org/)
 - [Jorge Luis Borges — "Del rigor en la ciencia" (the 1:1 scale map)](https://www.google.com/search?q=borges+del+rigor+en+la+ciencia+mapa+imperio)
 - [dev-squad — Rafael's plugin cited in the article](https://github.com/Korck-lab/dev_squad)
-- ["Here we go again!" — the witch from Woody Woodpecker](https://www.youtube.com/watch?v=o8jNBRXxass)
+- ["And away we go!" — the witch from Woody Woodpecker](https://www.youtube.com/watch?v=o8jNBRXxass)
 </content>
 </invoke>
