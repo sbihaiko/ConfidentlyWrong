@@ -8,11 +8,11 @@ Anyone who programmed in the 90s probably came across a tool called Rational Ros
 
 For me, Rational Rose mattered. Not just for the promise of automation, but because it helped cement a paradigm shift: from relational thinking to object orientation. It also made Design Patterns more concrete, more visible, almost tangible. I used this kind of tool a lot, first to learn and then to teach the next generation of programmers.
 
-In practice, someone would spend three weeks producing magnificent diagrams, print everything on A4 sheets, glue them together until they formed a giant panel, and hang the thing on the meeting room wall. For a few days, it was beautiful. Then the diagrams began to die, the code moved on, the model fell behind.
+In practice, someone would spend three weeks producing magnificent diagrams, print everything on letter-size sheets, glue them together until they formed a giant panel, and hang the thing on the meeting room wall. For a few days, it was beautiful. Then the diagrams began to die, the code moved on, the model fell behind.
 
 We had invented documentation that aged faster than it could be read. Academics gave this disease a pretty name: **the divergence problem**. The model and reality drift apart, and the distance between them only grows.
 
-In the next generation of CASE tools came TogetherJ, promising the famous *round-trip engineering*: if you changed the code, the diagram updated; if you changed the diagram, the code followed. It was paradise for diagrammers and A4-paper salesmen. The idea was elegant. It got a little further, but it didn't solve the problem either. It went extinct.
+In the next generation of CASE tools came TogetherJ, promising the famous *round-trip engineering*: if you changed the code, the diagram updated; if you changed the diagram, the code followed. It was paradise for diagrammers and paper salesmen. The idea was elegant. It got a little further, but it didn't solve the problem either. It went extinct.
 
 Thirty years later, the ghost of Rational Rose is back. Only this time it doesn't speak UML, it speaks natural language. The code generator is no longer a deterministic *boilerplate* generator, it's an Artificial Intelligence that promises to swallow ambiguity, fill gaps, and guess what you meant — even when you don't quite know what you want yet.
 
@@ -74,7 +74,7 @@ Here the story gets delicious, because none of this is really new. The pendulum 
 
 The software industry started with heavy processes: the infamous *Big Design Up Front*, the complete blueprint before the first line of code, a direct inheritance from the waterfall model.
 
-There was an almost psychological reason behind it. Back then, software development was desperate to be taken seriously as **engineering**. So it embraced the *hard* of civil engineering. And it imported, along with it, civil engineering's biggest limitation: you don't deconstruct a building with a click to rebuild it fifteen meters to the left. If the concrete is irreversible, plan everything before you pour it. The complete blueprint wasn't aesthetic vanity; it was a defense against a material that doesn't accept change.
+There was an almost psychological reason behind it. Back then, software development was desperate to be taken seriously as **engineering**. So it embraced the *hard* of civil engineering. And it imported, along with it, civil engineering's biggest limitation: you don't deconstruct a building with a click to rebuild it fifty feet to the left. If the concrete is irreversible, plan everything before you pour it. The complete blueprint wasn't aesthetic vanity; it was a defense against a material that doesn't accept change.
 
 Software copied the rigidity of a world where every mistake is paid for in demolition — forgetting that its own material, the bit, could be undone and redone almost for free.
 
@@ -90,7 +90,7 @@ But again we overdid it. Bureaucratic documentation became an addiction we were 
 
 In 2001, the Agile Manifesto emerged as a furious reaction to the excess of documentation: "working software over comprehensive documentation." The pendulum swung to the other side: less blueprint, more delivery.
 
-It was tempting to say that "the best specification is the code itself." It's a gorgeous sentence in the poetic sense, but a tiny fraction of teams manage to put it into practice. My experience says that number is smaller than 10%. The majority adopts GoHorse as their official methodology. :)
+It was tempting to say that "the best specification is the code itself." It's a gorgeous sentence in the poetic sense, but a tiny fraction of teams manage to put it into practice. My experience says that number is smaller than 10%. The majority adopts cowboy coding as their official methodology. :)
 
 And now? Now AI is pushing the pendulum back toward structure. Not because Agile was wrong, but for a new reason: AI **consumes context** as fuel. It works better when it receives explicit intent.
 
@@ -200,7 +200,7 @@ AI has already handed us the engine. Part 1 showed that power without control is
 
 Except that defining the problem well is worth absolutely nothing if you can't **prove** the machine solved it. That's where the other wall lives — the one at the output. In dev-squad, the commit isn't released by the opinion of a model saying everything's fine; it's released by an exit code, by the real result of the tests. Exit code, not opinion.
 
-## So what now?
+## Now what?
 
 In **Part 3**, the last of this series, I'm going to go head-to-head with the hardest problem of all: validation. How do you test a probabilistic, non-deterministic system that can respond differently to the same input? What does quality mean when software stops being a predictable machine and becomes a cognitive agent? And why is QA about to stop being a step in the process and become continuous control infrastructure?
 
