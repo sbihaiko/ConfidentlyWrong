@@ -70,7 +70,7 @@ It's dirt cheap to change direction every five minutes. The problem is that you 
 
 ## What we already knew in the 90s
 
-Here the story gets delicious, because none of this is really new. The pendulum has already traveled this arc before. Anyone who lived through the 90s recognizes the landscape in all its details. And, as the witch from Woody Woodpecker would say: "Here we go again!"
+Here the story gets delicious, because none of this is really new. The pendulum has already traveled this arc before. Anyone who lived through the 90s recognizes the landscape in all its details. And, as the witch from Woody Woodpecker would say: "And away we go!"
 
 The software industry started with heavy processes: the infamous *Big Design Up Front*, the complete blueprint before the first line of code, a direct inheritance from the waterfall model.
 
