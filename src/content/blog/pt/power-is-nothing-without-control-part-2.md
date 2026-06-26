@@ -216,3 +216,4 @@ Porque especificar é indispensável — mas verificar é o que separa a engenha
 - [O Manifesto Ágil (2001)](https://agilemanifesto.org/)
 - [Jorge Luis Borges — "Del rigor en la ciencia" (o mapa em escala 1:1)](https://www.google.com/search?q=borges+del+rigor+en+la+ciencia+mapa+imperio)
 - [dev-squad — o plugin de Rafael citado no artigo](https://github.com/Korck-lab/dev_squad)
+- ["E lá vamos nós!" — a bruxa do Pica-Pau](https://www.youtube.com/watch?v=AMw7OmHnHWg)
