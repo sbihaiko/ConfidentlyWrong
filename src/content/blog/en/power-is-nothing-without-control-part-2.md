@@ -217,4 +217,5 @@ Because specifying is indispensable — but verifying is what separates engineer
 - [Jorge Luis Borges — "Del rigor en la ciencia" (the 1:1 scale map)](https://www.google.com/search?q=borges+del+rigor+en+la+ciencia+mapa+imperio)
 - [dev-squad — Rafael's plugin cited in the article](https://github.com/Korck-lab/dev_squad)
 - [Charlie Brown and the football Lucy always pulls away (Peanuts)](https://www.youtube.com/watch?v=9ivn0C8oebg)
+- [Cowboy coding — the methodology nobody admits to using](https://en.wikipedia.org/wiki/Cowboy_coding)
 - ["We're going to choose cowboy coding every time" (Google for Developers)](https://www.youtube.com/watch?v=aYZL8raK-x8)
