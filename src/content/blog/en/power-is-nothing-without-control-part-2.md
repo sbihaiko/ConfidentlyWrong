@@ -208,6 +208,14 @@ Because specifying is indispensable — but verifying is what separates engineer
 
 ---
 
+**The series — Power is Nothing Without Control:**
+
+- [Part 1 — AI didn't eliminate work, it moved the bottleneck](/ConfidentlyWrong/blog/power-is-nothing-without-control-part-1/)
+- **Part 2 — Specification: the ghost of generating software from a model (you're here)**
+- Part 3 — Validation: testing a probabilistic system (coming soon)
+
+---
+
 **Links for the curious:**
 
 - [Rational Rose and the dream of round-trip engineering (UML)](https://www.google.com/search?q=rational+rose+uml+round-trip+engineering+history)

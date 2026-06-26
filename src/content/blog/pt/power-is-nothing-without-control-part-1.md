@@ -63,6 +63,14 @@ Porque potência sem controle continua sendo apenas uma forma muito eficiente de
 
 ---
 
+**A série — Potência não é nada sem controle:**
+
+- **Parte 1 — a IA não eliminou trabalho, deslocou o gargalo (você está aqui)**
+- [Parte 2 — a especificação: o fantasma de gerar software a partir de um modelo](/ConfidentlyWrong/pt/blog/power-is-nothing-without-control-part-2/)
+- Parte 3 — a validação: testar um sistema probabilístico (em breve)
+
+---
+
 **Links para os curiosos:**
 - [Comercial original da Pirelli com Carl Lewis (1994)](https://www.youtube.com/watch?v=d0hElvVpWcU)
 - [Curitiba — estação-tubo, ônibus biarticulados e vias estruturais](https://www.google.com/search?q=curitiba+%22esta%C3%A7%C3%A3o+tubo%22+%22onibus+biarticulados%22+%22mapa+vias+estruturais%22&tbm=isch)

@@ -208,6 +208,14 @@ Porque especificar é indispensável — mas verificar é o que separa a engenha
 
 ---
 
+**A série — Potência não é nada sem controle:**
+
+- [Parte 1 — a IA não eliminou trabalho, deslocou o gargalo](/ConfidentlyWrong/pt/blog/power-is-nothing-without-control-part-1/)
+- **Parte 2 — a especificação: o fantasma de gerar software a partir de um modelo (você está aqui)**
+- Parte 3 — a validação: testar um sistema probabilístico (em breve)
+
+---
+
 **Links para os curiosos:**
 
 - [Rational Rose e o sonho do round-trip engineering (UML)](https://www.google.com/search?q=rational+rose+uml+round-trip+engineering+history)

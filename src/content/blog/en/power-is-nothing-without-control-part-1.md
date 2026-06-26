@@ -63,6 +63,14 @@ Because power without control remains just a very efficient way to reach disaste
 
 ---
 
+**The series — Power is Nothing Without Control:**
+
+- **Part 1 — AI didn't eliminate work, it moved the bottleneck (you're here)**
+- [Part 2 — Specification: the ghost of generating software from a model](/ConfidentlyWrong/blog/power-is-nothing-without-control-part-2/)
+- Part 3 — Validation: testing a probabilistic system (coming soon)
+
+---
+
 **Links for the curious:**
 - [Original Pirelli commercial featuring Carl Lewis (1994)](https://www.youtube.com/watch?v=d0hElvVpWcU)
 - [Curitiba — tube stations, bi-articulated buses and structural road axes](https://www.google.com/search?q=curitiba+%22esta%C3%A7%C3%A3o+tubo%22+%22onibus+biarticulados%22+%22mapa+vias+estruturais%22&tbm=isch)
