@@ -200,7 +200,7 @@ AI has already handed us the engine. Part 1 showed that power without control is
 
 Except that defining the problem well is worth absolutely nothing if you can't **prove** the machine solved it. That's where the other wall lives — the one at the output. In dev-squad, the commit isn't released by the opinion of a model saying everything's fine; it's released by an exit code, by the real result of the tests. Exit code, not opinion.
 
-## So what now, José?
+## So what now?
 
 In **Part 3**, the last of this series, I'm going to go head-to-head with the hardest problem of all: validation. How do you test a probabilistic, non-deterministic system that can respond differently to the same input? What does quality mean when software stops being a predictable machine and becomes a cognitive agent? And why is QA about to stop being a step in the process and become continuous control infrastructure?
 
