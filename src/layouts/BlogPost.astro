@@ -95,13 +95,18 @@ const canonicalUrl = `${Astro.site?.origin ?? Astro.url.origin}${baseUrl}/blog/$
 				cursor: zoom-in;
 				transition: box-shadow 0.2s ease, transform 0.2s ease;
 			}
-			/* matrix treatment — negative + green tint + contrast (both content images) */
+			/* matrix treatment — light-bg diagram only (negative + green tint via CSS) */
 			.prose :global(img[src*='dev-squad-architecture']),
-			.prose :global(img[src*='dev-squad-run']),
-			.lightbox img[src*='dev-squad-architecture'],
-			.lightbox img[src*='dev-squad-run'] {
+			.lightbox img[src*='dev-squad-architecture'] {
 				filter: grayscale(1) invert(1) sepia(1) hue-rotate(70deg) saturate(6)
 					contrast(1.15) brightness(1.05);
+			}
+			/* terminal screenshot already has the matrix effect baked into the PNG —
+			   NO CSS filter here (a second filter would distort the green to cyan) */
+			.prose :global(img[src*='dev-squad-terminal']),
+			.lightbox img[src*='dev-squad-terminal'] {
+				border: none;
+				background: transparent;
 			}
 			.prose :global(img:hover) {
 				box-shadow: 0 0 20px rgba(0, 255, 65, 0.25);

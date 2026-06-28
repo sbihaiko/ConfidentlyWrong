@@ -194,7 +194,7 @@ Isso é documentação viva de verdade. Não uma spec congelada para ser venerad
 
 E não é teoria de slide. Aqui está uma execução real rodando no terminal:
 
-![Execução real do dev-squad no terminal: o pipeline de seis fases à esquerda, os pares actor/critic rodando em paralelo por tarefa, e o histórico de commits à esquerda mostrando uma tarefa por commit.](../../../assets/dev-squad-run.png)
+![Execução real do dev-squad no terminal: o pipeline de seis fases à esquerda, os pares actor/critic rodando em paralelo por tarefa, e o histórico de commits à esquerda mostrando uma tarefa por commit.](../../../assets/dev-squad-terminal.png)
 
 *Uma execução de sete tarefas: 15 de 16 agentes concluídos em pouco menos de 25 minutos. À esquerda, as fases (Scout 2/2, Spec 2/2, Decompose 5/5, Execute 6/7, Verify). Dentro do **Execute**, os pares `actor-bN-TN` / `critic-bN-TN` rodam em paralelo, cada tarefa em seu próprio worktree git isolado, e cada lote é mergeado assim que converge. Repare nos modelos: Opus na crítica, Sonnet na implementação e nos merges — papéis diferentes, ferramentas diferentes. À direita, o custo real de cada agente em tokens. E, no canto esquerdo, o grafo de commits mostra o resultado: uma tarefa por commit, mergeada de volta uma a uma.*
 

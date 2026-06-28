@@ -194,7 +194,7 @@ That's living documentation for real. Not a frozen spec to be worshipped on the 
 
 And it's not slideware. Here's a real run in the terminal:
 
-![A real dev-squad run in the terminal: the six-phase pipeline on the left, the actor/critic pairs running in parallel per task, and the commit history on the left showing one task per commit.](../../../assets/dev-squad-run.png)
+![A real dev-squad run in the terminal: the six-phase pipeline on the left, the actor/critic pairs running in parallel per task, and the commit history on the left showing one task per commit.](../../../assets/dev-squad-terminal.png)
 
 *A seven-task run: 15 of 16 agents finished in just under 25 minutes. On the left, the phases (Scout 2/2, Spec 2/2, Decompose 5/5, Execute 6/7, Verify). Inside **Execute**, the `actor-bN-TN` / `critic-bN-TN` pairs run in parallel, each task in its own isolated git worktree, and each batch is merged as soon as it converges. Notice the models: Opus on the critique, Sonnet on the implementation and the merges — different roles, different tools. On the right, each agent's real cost in tokens. And in the left corner, the commit graph shows the result: one task per commit, merged back one at a time.*
 
