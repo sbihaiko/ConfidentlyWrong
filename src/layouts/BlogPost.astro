@@ -89,11 +89,19 @@ const canonicalUrl = `${Astro.site?.origin ?? Astro.url.origin}${baseUrl}/blog/$
 				max-width: 100%;
 				height: auto;
 				margin: 1.5em auto;
-				border: 1px solid var(--border-color);
+				border: 1px solid var(--matrix-green);
 				border-radius: 6px;
-				background: #fff;
+				background: #000;
 				cursor: zoom-in;
 				transition: box-shadow 0.2s ease, transform 0.2s ease;
+			}
+			/* matrix treatment — negative + green tint + contrast (both content images) */
+			.prose :global(img[src*='dev-squad-architecture']),
+			.prose :global(img[src*='dev-squad-run']),
+			.lightbox img[src*='dev-squad-architecture'],
+			.lightbox img[src*='dev-squad-run'] {
+				filter: grayscale(1) invert(1) sepia(1) hue-rotate(70deg) saturate(6)
+					contrast(1.15) brightness(1.05);
 			}
 			.prose :global(img:hover) {
 				box-shadow: 0 0 20px rgba(0, 255, 65, 0.25);
@@ -119,7 +127,7 @@ const canonicalUrl = `${Astro.site?.origin ?? Astro.url.origin}${baseUrl}/blog/$
 				width: auto;
 				height: auto;
 				margin: 0 auto;
-				background: #fff;
+				background: #000;
 				border: 1px solid var(--matrix-green);
 				border-radius: 6px;
 				box-shadow: 0 0 40px rgba(0, 255, 65, 0.3);
