@@ -170,6 +170,14 @@ I promised, at the end of Part 1, to talk about living documentation and context
 
 I'm biased when it comes to talking about it. I already told you I was a guinea-pig user and that I smuggled some ideas into the tool. But it's precisely because I used it to the bone that I know what it does.
 
+Before getting into the details, it's worth seeing the whole picture at once:
+
+![dev-squad architecture: a single command runs a self-reviewing, test-gated pipeline, with an adversarial actor⇄critic loop that builds the code and a project memory that learns on every run.](../../../assets/dev-squad-architecture.svg)
+
+*Four layers. The plugin shell (L1) takes a command; the workflow engine (L2) runs the six-phase pipeline in the background, journaled and resumable; the project memory (L3) writes learnings and ADRs into your own repository and reinjects them into the next run; and the guardrails (L4) enforce universal AI-to-AI constraints. graphify enters as an optional input, answering questions about the existing codebase.*
+
+The map helps you read the rest of this section — notice three things the text is about to unpack. First, the core: under the **Execute** phase, each task runs inside an adversarial loop. An **Actor** implements the change and a **Critic** rejects it against a fixed rubric — security, error-handling, edge-cases, dead-code — until it converges. It's not the AI patting itself on the back; it's one AI building and another trying to tear it down. Second, the green diamond between **Verify** and **Commit**: that's a deterministic gate — nothing gets committed by a model's opinion, but by the exit code of the tests. Third, the big green loop rising from the bottom: every run writes project memory into the repository itself and feeds it back into the early phases of the next one. It's living documentation closing the cycle, drawn out.
+
 dev-squad runs a six-phase pipeline: scout, spec, decompose, execute, verify, commit. What matters here is how it treats the spec phase. Instead of trusting the AI to write a good specification on its own, it submits each spec to a battery of automatic checks **before a single line of code is written**. These are deterministic, zero-cost checks — plain code, not another AI call. When they find a problem, some reject the spec and send it back for a redo; others just raise a flag, for you to decide.
 
 Three of them deserve a spotlight, because they are, literally, this article's thesis turned into engineering.
@@ -183,6 +191,12 @@ The third ensures **fidelity to the request**. Everything you named explicitly i
 And there's the closing of the loop. Each run leaves behind a project memory — learnings and architecture decisions, those ADRs — recorded alongside the code in the repository itself. That memory is reinjected into the early phases of the next run. In other words: what the tool learned yesterday becomes automatic context tomorrow.
 
 That's living documentation for real. Not a frozen spec to be worshipped on the wall, but a spec that regenerates. A mechanism that accumulates learning and reduces, run after run, the amount of intent that has to be re-explained.
+
+And it's not slideware. Here's a real run in the terminal:
+
+![A real dev-squad run in the terminal: the six-phase pipeline on the left, the actor/critic pairs running in parallel per task, and the commit history on the left showing one task per commit.](../../../assets/dev-squad-run.png)
+
+*A seven-task run: 15 of 16 agents finished in just under 25 minutes. On the left, the phases (Scout 2/2, Spec 2/2, Decompose 5/5, Execute 6/7, Verify). Inside **Execute**, the `actor-bN-TN` / `critic-bN-TN` pairs run in parallel, each task in its own isolated git worktree, and each batch is merged as soon as it converges. Notice the models: Opus on the critique, Sonnet on the implementation and the merges — different roles, different tools. On the right, each agent's real cost in tokens. And in the left corner, the commit graph shows the result: one task per commit, merged back one at a time.*
 
 What dev-squad does, deep down, is refuse to choose between the two tribes. To do that, it separates two things the debate has always treated as one: *how you ask* and *how much rigor the request needs to have*.
 

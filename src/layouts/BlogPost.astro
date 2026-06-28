@@ -83,6 +83,65 @@ const canonicalUrl = `${Astro.site?.origin ?? Astro.url.origin}${baseUrl}/blog/$
 					font-size: 2.2em;
 				}
 			}
+			/* content images: clickable, open in lightbox */
+			.prose :global(img) {
+				display: block;
+				max-width: 100%;
+				height: auto;
+				margin: 1.5em auto;
+				border: 1px solid var(--border-color);
+				border-radius: 6px;
+				background: #fff;
+				cursor: zoom-in;
+				transition: box-shadow 0.2s ease, transform 0.2s ease;
+			}
+			.prose :global(img:hover) {
+				box-shadow: 0 0 20px rgba(0, 255, 65, 0.25);
+				transform: translateY(-2px);
+			}
+			/* lightbox dialog */
+			.lightbox {
+				border: none;
+				padding: 0;
+				background: transparent;
+				max-width: 96vw;
+				max-height: 96vh;
+				overflow: visible;
+			}
+			.lightbox::backdrop {
+				background: rgba(0, 0, 0, 0.88);
+				backdrop-filter: blur(2px);
+			}
+			.lightbox img {
+				display: block;
+				max-width: 96vw;
+				max-height: 90vh;
+				width: auto;
+				height: auto;
+				margin: 0 auto;
+				background: #fff;
+				border: 1px solid var(--matrix-green);
+				border-radius: 6px;
+				box-shadow: 0 0 40px rgba(0, 255, 65, 0.3);
+				cursor: zoom-out;
+			}
+			.lightbox-close {
+				position: absolute;
+				top: -2.2em;
+				right: 0;
+				background: none;
+				border: 1px solid var(--matrix-green);
+				color: var(--matrix-green);
+				font-family: inherit;
+				font-size: 1em;
+				line-height: 1;
+				padding: 0.4em 0.7em;
+				border-radius: 4px;
+				cursor: pointer;
+			}
+			.lightbox-close:hover {
+				background: rgba(0, 255, 65, 0.15);
+			}
 		</style>
 	</head>
 
@@ -119,5 +178,34 @@ const canonicalUrl = `${Astro.site?.origin ?? Astro.url.origin}${baseUrl}/blog/$
 			lang={lang}
 		/>
 		<Footer lang={lang} />
+
+		<dialog class="lightbox" aria-label="Imagem ampliada">
+			<button type="button" class="lightbox-close" aria-label="Fechar">✕ esc</button>
+			<img src="" alt="" />
+		</dialog>
+
+		<script>
+			const dialog = document.querySelector<HTMLDialogElement>('dialog.lightbox');
+			const dialogImg = dialog?.querySelector('img');
+			const closeBtn = dialog?.querySelector('.lightbox-close');
+
+			if (dialog && dialogImg) {
+				document.querySelectorAll<HTMLImageElement>('.prose img').forEach((img) => {
+					img.addEventListener('click', () => {
+						dialogImg.src = img.currentSrc || img.src;
+						dialogImg.alt = img.alt;
+						dialog.showModal();
+					});
+				});
+
+				const close = () => dialog.close();
+				closeBtn?.addEventListener('click', close);
+				dialogImg.addEventListener('click', close);
+				// click on backdrop (outside the image) closes too
+				dialog.addEventListener('click', (e) => {
+					if (e.target === dialog) close();
+				});
+			}
+		</script>
 	</body>
 </html>

@@ -170,6 +170,14 @@ Eu prometi, no fim da Parte 1, falar de documentação viva e arquitetura orient
 
 Sou suspeito para falar dele. Já contei que fui usuário-cobaia e que contrabandeei algumas ideias para dentro da ferramenta. Mas é justamente por tê-la usado no osso que sei o que ela faz.
 
+Antes de entrar nos detalhes, vale ver o desenho inteiro de uma vez:
+
+![Arquitetura do dev-squad: um único comando dispara um pipeline auto-revisado e barrado por testes, com um laço adversarial actor⇄critic que constrói o código e uma memória de projeto que aprende a cada execução.](../../../assets/dev-squad-architecture.svg)
+
+*Quatro camadas. O shell do plugin (L1) recebe um comando; o motor de workflow (L2) roda o pipeline de seis fases em background, jornalado e retomável; a memória de projeto (L3) grava aprendizados e ADRs no seu próprio repositório e os reinjeta na execução seguinte; e os guardrails (L4) impõem restrições universais de IA-para-IA. O graphify entra como entrada opcional, respondendo perguntas sobre o código já existente.*
+
+O mapa ajuda a ler o resto desta seção — repare em três coisas que o texto vai destrinchar. Primeiro, o miolo: sob a fase **Execute**, cada tarefa roda dentro de um laço adversarial. Um **Actor** implementa a mudança e um **Critic** a reprova contra uma rubrica fixa — segurança, tratamento de erro, casos de borda, código morto — até convergir. Não é a IA se auto-elogiando; é uma IA construindo e outra tentando derrubar. Segundo, o losango verde entre **Verify** e **Commit**: aquilo é um portão determinístico — nada é comitado pela opinião de um modelo, e sim pelo exit code dos testes. Terceiro, o grande laço verde que sobe do rodapé: cada execução grava memória de projeto no próprio repositório e a devolve para as fases iniciais da próxima. É a documentação viva fechando o ciclo, desenhada.
+
 O dev-squad roda um pipeline de seis fases: scout, spec, decompose, execute, verify, commit. O que importa aqui é como ele trata a fase de spec. Em vez de confiar que a IA vai escrever uma boa especificação por conta própria, ele submete cada spec a uma bateria de verificações automáticas **antes de uma única linha de código ser escrita**. São checagens determinísticas e de custo zero — código comum, não mais uma chamada de IA. Quando encontram um problema, umas reprovam a spec e mandam refazer; outras apenas levantam a bandeira, para você decidir.
 
 Três delas merecem destaque, porque são, literalmente, a tese deste artigo virada engenharia.
@@ -183,6 +191,12 @@ A terceira garante **fidelidade ao pedido**. Tudo que você nomeou de forma expl
 E há o fechamento do laço. Cada execução deixa para trás uma memória de projeto — aprendizados e decisões de arquitetura, os tais ADRs — gravada junto ao código no próprio repositório. Essa memória é reinjetada nas fases iniciais da execução seguinte. Ou seja: o que a ferramenta aprendeu ontem vira contexto automático amanhã.
 
 Isso é documentação viva de verdade. Não uma spec congelada para ser venerada na parede, mas uma spec que regenera. Um mecanismo que acumula aprendizado e reduz, execução após execução, a quantidade de intenção que precisa ser reexplicada.
+
+E não é teoria de slide. Aqui está uma execução real rodando no terminal:
+
+![Execução real do dev-squad no terminal: o pipeline de seis fases à esquerda, os pares actor/critic rodando em paralelo por tarefa, e o histórico de commits à esquerda mostrando uma tarefa por commit.](../../../assets/dev-squad-run.png)
+
+*Uma execução de sete tarefas: 15 de 16 agentes concluídos em pouco menos de 25 minutos. À esquerda, as fases (Scout 2/2, Spec 2/2, Decompose 5/5, Execute 6/7, Verify). Dentro do **Execute**, os pares `actor-bN-TN` / `critic-bN-TN` rodam em paralelo, cada tarefa em seu próprio worktree git isolado, e cada lote é mergeado assim que converge. Repare nos modelos: Opus na crítica, Sonnet na implementação e nos merges — papéis diferentes, ferramentas diferentes. À direita, o custo real de cada agente em tokens. E, no canto esquerdo, o grafo de commits mostra o resultado: uma tarefa por commit, mergeada de volta uma a uma.*
 
 O que o dev-squad faz, no fundo, é se recusar a escolher entre as duas tribos. Para isso, ele separa duas coisas que o debate sempre tratou como uma só: *como você pede* e *quanto rigor o pedido precisa ter*.
 
