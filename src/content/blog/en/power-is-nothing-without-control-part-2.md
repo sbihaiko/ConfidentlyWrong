@@ -166,9 +166,13 @@ It's not methodology theory. It's the RUP iterative-incremental cycle running li
 
 ## dev-squad, or the thesis turned into code
 
-I promised, at the end of Part 1, to talk about living documentation and context-oriented architecture. dev-squad is, today, the cleanest incarnation I know of that thesis.
+I promised, at the end of Part 1, to talk about living documentation and context-oriented architecture. And here an honest update is in order: this thesis is no longer a garage bet. The big commercial harnesses are visibly converging on it. The latest version of OpenAI's Codex already splits work across parallel subagents on its own, keeps a memory of what it learned between runs, and submits risky actions to automatic reviews before executing them. Anthropic's Claude Code orchestrates fleets of subagents through deterministic workflows. GitHub Copilot's coding agent only moves forward if CI lets it. Different names, the same design: explicit phases, verification as a gate, learning that persists.
 
-I'm biased when it comes to talking about it. I already told you I was a guinea-pig user and that I smuggled some ideas into the tool. But it's precisely because I used it to the bone that I know what it does.
+When competitors who don't talk to each other arrive at the same architecture, that's not a coincidence — it's a sign they're all responding to the same problem. And the problem is this series' problem: too much power, too little control.
+
+I'm going to use dev-squad as the example to unpack this design. Not because it's the only one — I just said it isn't — but because it's the one I used to the bone, and it's the incarnation of this thesis I know from the inside.
+
+I'm biased when it comes to talking about it. I already told you I was a guinea-pig user and that I smuggled some ideas into the tool. But it's precisely because I pushed it to its limits that I know what it does.
 
 Before getting into the details, it's worth seeing the whole picture at once:
 
@@ -204,6 +208,8 @@ You keep talking to the machine in natural language, in vibe's exploratory and i
 
 Personally, I understand dev-squad as the union of the best of both worlds. It's Rafael's autonomy bet and my manual-specification pragmatism converging inside the same tool. Neither of us gave up his side; but it's the tool that learned to sustain both at the same time.
 
+And that's why watching the commercial harnesses arrive at the same place doesn't bother me — it reassures me. The value of dev-squad, for me, was never in being unique. It was in letting us live this architecture from the inside, mistake by mistake, before it went mainstream. The thesis holds up not because one tool implemented it, but because several, starting from different points, were pushed toward it.
+
 ## The equilibrium point
 
 In the end, maybe we were both walking toward the same place — only from opposite sides. Rafael bet on "one prompt"; I bet on the hand-written specification. It turns out that a sufficiently good prompt **is** a specification, and a sufficiently smart machine shrinks the spec down to that prompt and co-writes the rest. The two paths meet somewhere in the middle.
@@ -212,7 +218,7 @@ But that equilibrium point isn't "the spec disappears." It's the specification b
 
 AI has already handed us the engine. Part 1 showed that power without control is just an efficient way to reach the disaster faster; this part tried to show where the first brake is: in the way we define the problem before the machine takes off to solve it.
 
-Except that defining the problem well is worth absolutely nothing if you can't **prove** the machine solved it. That's where the other wall lives — the one at the output. In dev-squad, the commit isn't released by the opinion of a model saying everything's fine; it's released by an exit code, by the real result of the tests. Exit code, not opinion.
+Except that defining the problem well is worth absolutely nothing if you can't **prove** the machine solved it. That's where the other wall lives — the one at the output. In dev-squad, as in the harnesses walking the same path, the commit isn't released by the opinion of a model saying everything's fine; it's released by an exit code, by the real result of the tests. Exit code, not opinion.
 
 ## Now what?
 
@@ -237,7 +243,8 @@ Because specifying is indispensable — but verifying is what separates engineer
 - [GitHub Spec Kit — spec-driven development](https://github.com/github/spec-kit)
 - [The Agile Manifesto (2001)](https://agilemanifesto.org/)
 - [Jorge Luis Borges — "Del rigor en la ciencia" (the 1:1 scale map)](https://www.google.com/search?q=borges+del+rigor+en+la+ciencia+mapa+imperio)
-- [dev-squad — Rafael's plugin cited in the article](https://github.com/Korck-lab/dev_squad)
+- [dev-squad — Rafael's plugin, used as the example in the article](https://github.com/Korck-lab/dev_squad)
+- [OpenAI Codex — the commercial harness converging on the same architecture](https://openai.com/index/codex-for-almost-everything/)
 - [Charlie Brown and the football Lucy always pulls away (Peanuts)](https://www.youtube.com/watch?v=9ivn0C8oebg)
 - [Cowboy coding — the methodology nobody admits to using](https://en.wikipedia.org/wiki/Cowboy_coding)
 - ["We're going to choose cowboy coding every time" (Google for Developers)](https://www.youtube.com/watch?v=aYZL8raK-x8)

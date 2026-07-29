@@ -166,9 +166,13 @@ Não é teoria de metodologia. É o ciclo iterativo-incremental do RUP rodando a
 
 ## O dev-squad, ou a tese virada código
 
-Eu prometi, no fim da Parte 1, falar de documentação viva e arquitetura orientada a contexto. O dev-squad é, hoje, a encarnação mais limpa que conheço dessa tese.
+Eu prometi, no fim da Parte 1, falar de documentação viva e arquitetura orientada a contexto. E aqui cabe uma atualização honesta: essa tese deixou de ser aposta de garagem. Os grandes harnesses comerciais estão convergindo para ela a olhos vistos. A versão mais recente do Codex, da OpenAI, já divide o trabalho entre subagentes paralelos por conta própria, guarda memória do que aprendeu entre execuções e submete ações arriscadas a revisões automáticas antes de executá-las. O Claude Code, da Anthropic, orquestra frotas de subagentes em workflows determinísticos. O coding agent do GitHub Copilot só avança se o CI deixar. Nomes diferentes, o mesmo desenho: fases explícitas, verificação como portão, aprendizado que persiste.
 
-Sou suspeito para falar dele. Já contei que fui usuário-cobaia e que contrabandeei algumas ideias para dentro da ferramenta. Mas é justamente por tê-la usado no osso que sei o que ela faz.
+Quando concorrentes que não conversam entre si chegam à mesma arquitetura, isso não é coincidência — é sinal de que estão todos respondendo ao mesmo problema. E o problema é o desta série: potência demais, controle de menos.
+
+Vou usar o dev-squad como exemplo para destrinchar esse desenho. Não porque ele seja o único — acabei de dizer que não é —, mas porque foi o que usei no osso, e é a encarnação dessa tese que conheço por dentro.
+
+Sou suspeito para falar dele. Já contei que fui usuário-cobaia e que contrabandeei algumas ideias para dentro da ferramenta. Mas é justamente por tê-la usado no limite que sei o que ela faz.
 
 Antes de entrar nos detalhes, vale ver o desenho inteiro de uma vez:
 
@@ -202,7 +206,9 @@ O que o dev-squad faz, no fundo, é se recusar a escolher entre as duas tribos. 
 
 Você continua conversando com a máquina em linguagem natural, no modo exploratório e intuitivo do vibe — sem precisar sentar antes para redigir um documento denso. Mas, antes de virar código, aquilo que você pediu tem que atravessar um portão. E é no portão que a disciplina dos spec-driven é cobrada: substância, fidelidade, vigilância contra a divergência. O que a outra tribo exigia de você na entrada, escrevendo tudo à mão, o dev-squad passa a exigir da própria spec na passagem — automaticamente. E, como ele aprende a cada volta, o portão vai ficando mais esperto. A liberdade do vibe fica na largada. O rigor da especificação fica no portão.
 
-Pessoalmente entendo o Dev-Squad como a união do melhor dos dois mundos. É a aposta de autonomia do Rafael e o meu pragmatismo de especificação manual convergindo dentro da mesma ferramenta. Nenhum de nós dois abriu mão do seu lado; mas é a ferramenta que aprendeu a sustentar os dois ao mesmo tempo.
+Pessoalmente entendo o dev-squad como a união do melhor dos dois mundos. É a aposta de autonomia do Rafael e o meu pragmatismo de especificação manual convergindo dentro da mesma ferramenta. Nenhum de nós dois abriu mão do seu lado; mas é a ferramenta que aprendeu a sustentar os dois ao mesmo tempo.
+
+E é por isso que ver os harnesses comerciais chegarem ao mesmo lugar não me incomoda — me tranquiliza. O valor do dev-squad, para mim, nunca esteve em ser único. Esteve em nos deixar viver essa arquitetura por dentro, erro a erro, antes de ela virar mainstream. A tese se sustenta não porque uma ferramenta a implementou, mas porque várias, partindo de pontos diferentes, foram empurradas para ela.
 
 ## O ponto de equilíbrio
 
@@ -212,7 +218,7 @@ Mas esse ponto de equilíbrio não é “a spec desaparece”. É a especificaç
 
 A IA já nos entregou o motor. A Parte 1 mostrou que potência sem controle é apenas um jeito eficiente de chegar mais rápido ao desastre; esta tentou mostrar onde fica o primeiro freio: na maneira como definimos o problema antes de a máquina sair correndo para resolvê-lo.
 
-Só que definir bem o problema não vale absolutamente nada se você não consegue **provar** que a máquina o resolveu. É aí que mora a outra parede — a da saída. No dev-squad, o commit não é liberado pela opinião de um modelo dizendo que está tudo bem; é liberado por um código de saída, pelo resultado real dos testes. Exit code, não opinião.
+Só que definir bem o problema não vale absolutamente nada se você não consegue **provar** que a máquina o resolveu. É aí que mora a outra parede — a da saída. No dev-squad, como nos harnesses que seguem o mesmo caminho, o commit não é liberado pela opinião de um modelo dizendo que está tudo bem; é liberado por um código de saída, pelo resultado real dos testes. Exit code, não opinião.
 
 ## E agora José?
 
@@ -237,6 +243,7 @@ Porque especificar é indispensável — mas verificar é o que separa a engenha
 - [GitHub Spec Kit — spec-driven development](https://github.com/github/spec-kit)
 - [O Manifesto Ágil (2001)](https://agilemanifesto.org/)
 - [Jorge Luis Borges — "Del rigor en la ciencia" (o mapa em escala 1:1)](https://www.google.com/search?q=borges+del+rigor+en+la+ciencia+mapa+imperio)
-- [dev-squad — o plugin de Rafael citado no artigo](https://github.com/Korck-lab/dev_squad)
+- [dev-squad — o plugin de Rafael, usado como exemplo no artigo](https://github.com/Korck-lab/dev_squad)
+- [OpenAI Codex — o harness comercial convergindo para a mesma arquitetura](https://openai.com/index/codex-for-almost-everything/)
 - ["E lá vamos nós!" — a bruxa do Pica-Pau](https://www.youtube.com/watch?v=AMw7OmHnHWg)
 - [GoHorse — a metodologia que todos negam usar](https://www.youtube.com/watch?v=kv2DiFQXq9Q)
