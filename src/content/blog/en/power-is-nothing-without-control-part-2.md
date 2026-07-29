@@ -150,65 +150,35 @@ The safeguard is the cycle: the AI drafts, the human ratifies the core, and dete
 
 So far I've treated the tribes as abstractions. But I live them incarnated in two people: me and my friend Rafael Costa, a.k.a. Korck — one of the strongest advocates I know of fully autonomous coding and the author of the tool that will name the rest of this text: dev-squad.
 
-For almost two years, Korck has held a bet: it will be possible, with **a single prompt**, to research, understand, and generate the complete final result. Full autonomy.
+For almost two years, Korck has held a bet: with **a single prompt**, the machine researches, understands, and delivers the final result. Full autonomy. I think this will one day be possible — I just don't know when it'll be one hundred percent true. That difference of faith between the two of us isn't a fight. It's the tension between the two tribes, lived in the flesh.
 
-You describe the problem once, and the machine handles the rest: from understanding to delivery. I think this will eventually be possible. Honestly, I don't know when it will be one hundred percent true. That difference of faith between the two of us isn't a fight. It's the tension between the two tribes lived in the flesh.
+The opposite pole fell to me: engineering for the speed we **have**, not the one we **wish for**. While Korck built dev-squad aiming for full autonomy, I used it day to day and patched, by hand, the holes the tool didn't yet cover — writing specifications where the machine stumbled.
 
-Since Korck is the pole of autonomy, the pole of pragmatism fell to me: engineering for the speed we **have**, not the one we **wish for**.
-
-From the start, I believed the viable point lived somewhere between the two extremes. But to truly learn, you had to live each extreme from the inside. And that's exactly what we did.
-
-While Korck built dev-squad aiming for full autonomy, I used it day to day and patched, by hand, the holes the tool didn't yet cover. I wrote specifications manually where the machine stumbled.
-
-Each time I discovered a better way to specify in order to get better code, I passed the discovery on to Rafa, who decided whether or not it became a mechanism inside the tool. The ADRs — Architecture Decision Records, today a native part of dev-squad — were born from this back-and-forth.
-
-It's not methodology theory. It's the RUP iterative-incremental cycle running live, between two friends and a tool. Each turn refined understanding, and each mistake became a durable rule.
+Each time I discovered a better way to specify, I passed the discovery on to Rafa, who decided whether it became a mechanism inside the tool. The ADRs — Architecture Decision Records, today native to dev-squad — were born from this back-and-forth: the RUP iterative-incremental cycle, running live between two friends and a tool.
 
 ## dev-squad, or the thesis turned into code
 
-I promised, at the end of Part 1, to talk about living documentation and context-oriented architecture. And here an honest update is in order: this thesis is no longer a garage bet. The big commercial harnesses are visibly converging on it. The latest version of OpenAI's Codex already splits work across parallel subagents on its own, keeps a memory of what it learned between runs, and submits risky actions to automatic reviews before executing them. Anthropic's Claude Code orchestrates fleets of subagents through deterministic workflows. GitHub Copilot's coding agent only moves forward if CI lets it. Different names, the same design: explicit phases, verification as a gate, learning that persists.
+I promised, at the end of Part 1, to talk about living documentation and context-oriented architecture. Honest update: this thesis is no longer a garage bet. The big commercial harnesses are visibly converging on it — Codex already splits work across subagents and keeps memory between runs; Claude Code orchestrates fleets of subagents through deterministic workflows; GitHub Copilot's coding agent only moves forward if CI lets it. Different names, the same design: explicit phases, verification as a gate, learning that persists. When competitors who don't talk to each other arrive at the same architecture, that's not a coincidence.
 
-When competitors who don't talk to each other arrive at the same architecture, that's not a coincidence — it's a sign they're all responding to the same problem. And the problem is this series' problem: too much power, too little control.
-
-I'm going to use dev-squad as the example to unpack this design. Not because it's the only one — I just said it isn't — but because it's the one I used to the bone, and it's the incarnation of this thesis I know from the inside.
-
-I'm biased when it comes to talking about it. I already told you I was a guinea-pig user and that I smuggled some ideas into the tool. But it's precisely because I pushed it to its limits that I know what it does.
-
-Before getting into the details, it's worth seeing the whole picture at once:
+I use dev-squad to unpack this design — not because it's the only one, but because it's the one I used to the bone, the thesis I know from the inside.
 
 ![dev-squad architecture: a single command runs a self-reviewing, test-gated pipeline, with an adversarial actor⇄critic loop that builds the code and a project memory that learns on every run.](../../../assets/dev-squad-architecture.svg)
 
-*Four layers. The plugin shell (L1) takes a command; the workflow engine (L2) runs the six-phase pipeline in the background, journaled and resumable; the project memory (L3) writes learnings and ADRs into your own repository and reinjects them into the next run; and the guardrails (L4) enforce universal AI-to-AI constraints. graphify enters as an optional input, answering questions about the existing codebase.*
+*Four layers: a command comes in, a six-phase pipeline runs, project memory writes ADRs and feeds them back into the next run, and universal AI-to-AI guardrails enforce constraints throughout.*
 
-The map helps you read the rest of this section — notice three things the text is about to unpack. First, the core: under the **Execute** phase, each task runs inside an adversarial loop. An **Actor** implements the change and a **Critic** rejects it against a fixed rubric — security, error-handling, edge-cases, dead-code — until it converges. It's not the AI patting itself on the back; it's one AI building and another trying to tear it down. Second, the green diamond between **Verify** and **Commit**: that's a deterministic gate — nothing gets committed by a model's opinion, but by the exit code of the tests. Third, the big green loop rising from the bottom: every run writes project memory into the repository itself and feeds it back into the early phases of the next one. It's living documentation closing the cycle, drawn out.
+The pipeline runs from scout to commit in six phases. In the middle, an **Actor** implements and a **Critic** rejects it against a fixed rubric — security, error-handling, edge-cases, dead code — until it converges. And the commit only happens on the tests' exit code, never on a model's opinion.
 
-dev-squad runs a six-phase pipeline: scout, spec, decompose, execute, verify, commit. What matters here is how it treats the spec phase. Instead of trusting the AI to write a good specification on its own, it submits each spec to a battery of automatic checks **before a single line of code is written**. These are deterministic, zero-cost checks — plain code, not another AI call. When they find a problem, some reject the spec and send it back for a redo; others just raise a flag, for you to decide.
+The phase that matters most for this thesis is the **spec**: before any code, each specification passes through automatic, free checks. They block **emptiness** ("must work correctly" points to nothing concrete), watch the **target** (does what got resolved match what recent runs were touching?), and enforce **fidelity** (nothing you asked for can silently shrink along the way).
 
-Three of them deserve a spotlight, because they are, literally, this article's thesis turned into engineering.
-
-The first hunts down **empty** specifications. An acceptance criterion like "the system must work correctly" says nothing to whoever's going to build it — so it's blocked on the spot. To pass, it has to point to something concrete: a file, a command, a number, an identifier. It's "density isn't the problem; vacuity is" turned into an automatic gate. The spec can be short, but it can't be hollow.
-
-The second watches the **target** — when your request is vague or referential ("fix that bug," "update this"), the AI has to guess which files you're thinking of. This check compares the target it resolved against what recent runs were touching; when the two have nothing in common, it's a sign it may be about to solve the wrong problem perfectly. Here dev-squad doesn't block — it raises a flag: it logs a warning, for you and for the next run, that the target needs confirmation. It's divergence hunted down early, instead of discovered too late, when it's already turned into debt.
-
-The third ensures **fidelity to the request**. Everything you named explicitly in the original request has to survive all the way to the final specification. Without that, it's easy for the AI to silently "simplify" the scope along the way and hand you a shrunken version of what you asked for, without warning. The check doesn't let the spec slim down your request behind your back. It's the defense against drift.
-
-And there's the closing of the loop. Each run leaves behind a project memory — learnings and architecture decisions, those ADRs — recorded alongside the code in the repository itself. That memory is reinjected into the early phases of the next run. In other words: what the tool learned yesterday becomes automatic context tomorrow.
-
-That's living documentation for real. Not a frozen spec to be worshipped on the wall, but a spec that regenerates. A mechanism that accumulates learning and reduces, run after run, the amount of intent that has to be re-explained.
-
-And it's not slideware. Here's a real run in the terminal:
+And each run feeds the next: learnings and ADRs written to the repository, reinjected into the next round. Not a spec frozen on the wall — a spec that regenerates.
 
 ![A real dev-squad run in the terminal: the six-phase pipeline on the left, the actor/critic pairs running in parallel per task, and the commit history on the left showing one task per commit.](../../../assets/dev-squad-terminal.png)
 
-*A seven-task run: 15 of 16 agents finished in just under 25 minutes. On the left, the phases (Scout 2/2, Spec 2/2, Decompose 5/5, Execute 6/7, Verify). Inside **Execute**, the `actor-bN-TN` / `critic-bN-TN` pairs run in parallel, each task in its own isolated git worktree, and each batch is merged as soon as it converges. Notice the models: Opus on the critique, Sonnet on the implementation and the merges — different roles, different tools. On the right, each agent's real cost in tokens. And in the left corner, the commit graph shows the result: one task per commit, merged back one at a time.*
+*A real run: 15 of 16 agents finished in just under 25 minutes, Opus on the critique and Sonnet on the implementation, each task in its own git worktree — one task, one commit.*
 
-What dev-squad does, deep down, is refuse to choose between the two tribes. To do that, it separates two things the debate has always treated as one: *how you ask* and *how much rigor the request needs to have*.
+Deep down, dev-squad refuses to choose between the two tribes. It separates two things the debate has always treated as one: *how you ask* and *how much rigor the request needs*. You keep talking to the machine in natural language, in vibe mode — but before it becomes code, what you asked for crosses an automatic gate, getting smarter with every run. Freedom stays at the start line; rigor stays at the gate.
 
-You keep talking to the machine in natural language, in vibe's exploratory and intuitive mode — without having to sit down first to draft a dense document. But, before it becomes code, what you asked for has to cross a gate. And it's at the gate that the spec-driven discipline is collected: substance, fidelity, vigilance against divergence. What the other tribe demanded of you at the input, writing everything by hand, dev-squad now demands of the spec itself at the passage — automatically. And, because it learns with each turn, the gate keeps getting smarter. The freedom of vibe stays at the start line. The rigor of specification stays at the gate.
-
-Personally, I understand dev-squad as the union of the best of both worlds. It's Rafael's autonomy bet and my manual-specification pragmatism converging inside the same tool. Neither of us gave up his side; but it's the tool that learned to sustain both at the same time.
-
-And that's why watching the commercial harnesses arrive at the same place doesn't bother me — it reassures me. The value of dev-squad, for me, was never in being unique. It was in letting us live this architecture from the inside, mistake by mistake, before it went mainstream. The thesis holds up not because one tool implemented it, but because several, starting from different points, were pushed toward it.
+It's Rafael's autonomy bet and my manual-specification pragmatism converging inside the same tool — neither of us gave up his side, but the tool learned to sustain both at once. And that's why watching the commercial harnesses arrive at the same place doesn't bother me — it reassures me. The thesis holds up not because one tool implemented it, but because several, starting from different points, were pushed toward it.
 
 ## The equilibrium point
 
