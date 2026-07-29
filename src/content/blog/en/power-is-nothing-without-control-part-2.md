@@ -112,9 +112,9 @@ AI only made this mistake easier to commit, because it compressed the loop to th
 
 ## It's not *how much* spec. It's *which* spec.
 
-If vibe and density are phases, not enemies, then the question "how much should I specify?" is badly framed. The right question is: **what, exactly, belongs in the specification?**
+If vibe and the dense spec are phases, not enemies, then the question "how much should I specify?" is badly framed. The right question is: **what, exactly, belongs in the specification?**
 
-The answer I've been building over the past year is to decouple density from implementation. There's what's durable and there's what's disposable. The tragedy of traditional dense specifications is mixing the two in the same document.
+The answer I've been building over the past year is to decouple substance from volume. What makes a spec good isn't the amount of text, it's the amount of intent per paragraph — density isn't the problem; vacuity is. There's what's durable and there's what's disposable, and the tragedy of traditional dense specifications is mixing the two in the same document.
 
 What's **durable** — and therefore belongs in the spec — is intent, contracts, invariants, constraints, and the why.
 

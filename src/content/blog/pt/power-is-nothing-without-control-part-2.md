@@ -112,9 +112,9 @@ A IA só tornou esse erro mais fácil de cometer, porque comprimiu o loop a tal 
 
 ## Não é *quanta* spec. É *qual* spec.
 
-Se vibe e densidade são fases, e não inimigos, então a pergunta “quanto devo especificar?” está mal formulada. A pergunta certa é: **o que, exatamente, pertence à especificação?**
+Se vibe e spec densa são fases, e não inimigas, então a pergunta “quanto devo especificar?” está mal formulada. A pergunta certa é: **o que, exatamente, pertence à especificação?**
 
-A resposta que fui construindo ao longo do último ano é desacoplar densidade de implementação. Existe o que é durável e existe o que é descartável. A tragédia das especificações densas tradicionais é misturar os dois no mesmo documento.
+A resposta que fui construindo ao longo do último ano é desacoplar substância de volume. O que faz uma spec boa não é a quantidade de texto, é a quantidade de intenção por parágrafo — densidade não é o problema; vacuidade é. Existe o que é durável e existe o que é descartável, e a tragédia das especificações densas tradicionais é misturar os dois no mesmo documento.
 
 O que é **durável** — e portanto pertence à spec — são intenção, contratos, invariantes, restrições e o porquê.
 
