@@ -150,65 +150,35 @@ A salvaguarda é o ciclo: a IA rascunha, o humano ratifica o núcleo, e mecanism
 
 Até aqui tratei as tribos como abstrações. Mas eu as vivo encarnadas em duas pessoas: eu e meu amigo Rafael Costa, o Korck — um dos maiores defensores que conheço de uma codificação 100% autônoma e autor da ferramenta que vai dar nome ao resto deste texto: o dev-squad.
 
-Há quase dois anos, o Korck sustenta uma aposta: será possível, com **um único prompt**, pesquisar, entender e gerar o resultado final completo. Autonomia total.
+Há quase dois anos, o Korck sustenta uma aposta: com **um único prompt**, a máquina pesquisa, entende e entrega o resultado final. Autonomia total. Eu acho que isso um dia será possível — só não sei quando será cem por cento verdade. Essa diferença de fé entre nós dois não é briga. É a tensão entre as duas tribos, vivida na pele.
 
-Você descreve o problema uma vez, e a máquina cuida do resto: do entendimento à entrega. Eu acho que isso eventualmente será possível. Honestamente, não sei quando será cem por cento verdade. Essa diferença de fé entre nós dois não é briga. É a tensão entre as duas tribos vivida na pele.
+Coube a mim o polo oposto: engenheirar para a velocidade que a gente **tem**, não para a que a gente **deseja**. Enquanto o Korck construía o dev-squad mirando a autonomia total, eu o usava no dia a dia e tapava, na mão, os buracos que a ferramenta ainda não cobria — escrevendo especificações onde a máquina tropeçava.
 
-Já que o Korck é o polo da autonomia, coube a mim o polo do pragmatismo: engenheirar para a velocidade que a gente **tem**, não para a que a gente **deseja**.
-
-Desde o início, acreditei que o ponto viável morava em algum lugar entre os dois extremos. Mas, para aprender de verdade, era preciso viver cada extremo por dentro. E foi exatamente o que fizemos.
-
-Enquanto o Korck construía o dev-squad mirando a autonomia total, eu o usava no dia a dia e ia tapando, na mão, os buracos que a ferramenta ainda não cobria. Escrevia especificações manualmente onde a máquina tropeçava.
-
-Cada vez que eu descobria um jeito melhor de especificar para obter código melhor, passava a descoberta para o Rafa, que decidia se aquilo virava ou não um mecanismo dentro da ferramenta. Os ADRs — Architecture Decision Records, hoje parte nativa do dev-squad — nasceram desse vai-e-vem.
-
-Não é teoria de metodologia. É o ciclo iterativo-incremental do RUP rodando ao vivo, entre dois amigos e uma ferramenta. Cada volta refinava o entendimento, e cada erro virava uma regra durável.
+Cada vez que eu descobria um jeito melhor de especificar, passava a descoberta para o Rafa, que decidia se ela virava mecanismo da ferramenta. Os ADRs — Architecture Decision Records, hoje nativos no dev-squad — nasceram desse vai-e-vem: o ciclo iterativo-incremental do RUP, rodando ao vivo entre dois amigos e uma ferramenta.
 
 ## O dev-squad, ou a tese virada código
 
-Eu prometi, no fim da Parte 1, falar de documentação viva e arquitetura orientada a contexto. E aqui cabe uma atualização honesta: essa tese deixou de ser aposta de garagem. Os grandes harnesses comerciais estão convergindo para ela a olhos vistos. A versão mais recente do Codex, da OpenAI, já divide o trabalho entre subagentes paralelos por conta própria, guarda memória do que aprendeu entre execuções e submete ações arriscadas a revisões automáticas antes de executá-las. O Claude Code, da Anthropic, orquestra frotas de subagentes em workflows determinísticos. O coding agent do GitHub Copilot só avança se o CI deixar. Nomes diferentes, o mesmo desenho: fases explícitas, verificação como portão, aprendizado que persiste.
+Prometi, no fim da Parte 1, falar de documentação viva e arquitetura orientada a contexto. Atualização honesta: essa tese deixou de ser aposta de garagem. Os grandes harnesses comerciais estão convergindo para ela a olhos vistos — o Codex já divide trabalho entre subagentes e guarda memória entre execuções; o Claude Code orquestra frotas de subagentes em workflows determinísticos; o coding agent do Copilot só avança se o CI deixar. Nomes diferentes, o mesmo desenho: fases explícitas, verificação como portão, aprendizado que persiste. Quando concorrentes que não conversam entre si chegam à mesma arquitetura, isso não é coincidência.
 
-Quando concorrentes que não conversam entre si chegam à mesma arquitetura, isso não é coincidência — é sinal de que estão todos respondendo ao mesmo problema. E o problema é o desta série: potência demais, controle de menos.
-
-Vou usar o dev-squad como exemplo para destrinchar esse desenho. Não porque ele seja o único — acabei de dizer que não é —, mas porque foi o que usei no osso, e é a encarnação dessa tese que conheço por dentro.
-
-Sou suspeito para falar dele. Já contei que fui usuário-cobaia e que contrabandeei algumas ideias para dentro da ferramenta. Mas é justamente por tê-la usado no limite que sei o que ela faz.
-
-Antes de entrar nos detalhes, vale ver o desenho inteiro de uma vez:
+Uso o dev-squad para destrinchar esse desenho — não por ser único, mas por ser o que usei no osso, a tese que conheço por dentro.
 
 ![Arquitetura do dev-squad: um único comando dispara um pipeline auto-revisado e barrado por testes, com um laço adversarial actor⇄critic que constrói o código e uma memória de projeto que aprende a cada execução.](../../../assets/dev-squad-architecture.svg)
 
-*Quatro camadas. O shell do plugin (L1) recebe um comando; o motor de workflow (L2) roda o pipeline de seis fases em background, jornalado e retomável; a memória de projeto (L3) grava aprendizados e ADRs no seu próprio repositório e os reinjeta na execução seguinte; e os guardrails (L4) impõem restrições universais de IA-para-IA. O graphify entra como entrada opcional, respondendo perguntas sobre o código já existente.*
+*Quatro camadas: comando → pipeline de seis fases → memória de projeto que grava ADRs e realimenta a próxima execução → guardrails universais de IA-para-IA.*
 
-O mapa ajuda a ler o resto desta seção — repare em três coisas que o texto vai destrinchar. Primeiro, o miolo: sob a fase **Execute**, cada tarefa roda dentro de um laço adversarial. Um **Actor** implementa a mudança e um **Critic** a reprova contra uma rubrica fixa — segurança, tratamento de erro, casos de borda, código morto — até convergir. Não é a IA se auto-elogiando; é uma IA construindo e outra tentando derrubar. Segundo, o losango verde entre **Verify** e **Commit**: aquilo é um portão determinístico — nada é comitado pela opinião de um modelo, e sim pelo exit code dos testes. Terceiro, o grande laço verde que sobe do rodapé: cada execução grava memória de projeto no próprio repositório e a devolve para as fases iniciais da próxima. É a documentação viva fechando o ciclo, desenhada.
+O pipeline vai de scout a commit em seis fases. No meio, um **Actor** implementa e um **Critic** reprova contra uma rubrica fixa — segurança, erro, borda, código morto — até convergir. E o commit só acontece pelo exit code dos testes, nunca pela opinião de um modelo.
 
-O dev-squad roda um pipeline de seis fases: scout, spec, decompose, execute, verify, commit. O que importa aqui é como ele trata a fase de spec. Em vez de confiar que a IA vai escrever uma boa especificação por conta própria, ele submete cada spec a uma bateria de verificações automáticas **antes de uma única linha de código ser escrita**. São checagens determinísticas e de custo zero — código comum, não mais uma chamada de IA. Quando encontram um problema, umas reprovam a spec e mandam refazer; outras apenas levantam a bandeira, para você decidir.
+A fase que mais importa para esta tese é a **spec**: antes de qualquer código, cada especificação passa por checagens automáticas e gratuitas. Elas barram o **vazio** (“deve funcionar corretamente” não aponta pra nada concreto), vigiam o **alvo** (o que foi resolvido bate com o que as últimas execuções vinham mexendo?) e cobram **fidelidade** (nada do que você pediu pode encolher em silêncio pelo caminho).
 
-Três delas merecem destaque, porque são, literalmente, a tese deste artigo virada engenharia.
-
-A primeira caça especificações **vazias**. Um critério de aceitação como “o sistema deve funcionar corretamente” não diz nada a quem vai construir — então é barrado na hora. Para passar, ele precisa apontar para algo concreto: um arquivo, um comando, um número, um identificador. É o “densidade não é o problema; vacuidade é” transformado em portão automático. A spec pode ser curta, mas não pode ser oca.
-
-A segunda vigia o **alvo** — Quando o seu pedido é vago ou referencial (“conserta aquele bug”, “atualiza isso”), a IA precisa adivinhar em que arquivos você está pensando. Essa checagem compara o alvo que ela resolveu com aquilo que as execuções recentes vinham mexendo; quando os dois não têm nada em comum, é sinal de que ela pode estar prestes a resolver com perfeição o problema errado. Aqui o dev-squad não bloqueia — ele levanta a bandeira: registra um aviso, para você e para a próxima execução, de que o alvo precisa ser confirmado. É a divergência caçada cedo, em vez de descoberta tarde demais, quando já virou dívida.
-
-A terceira garante **fidelidade ao pedido**. Tudo que você nomeou de forma explícita na solicitação original precisa sobreviver até a especificação final. Sem isso, é fácil a IA “simplificar” o escopo silenciosamente pelo caminho e te entregar uma versão encolhida do que você pediu, sem avisar. A checagem não deixa a spec emagrecer o seu pedido nas suas costas. É a defesa contra a deriva.
-
-E há o fechamento do laço. Cada execução deixa para trás uma memória de projeto — aprendizados e decisões de arquitetura, os tais ADRs — gravada junto ao código no próprio repositório. Essa memória é reinjetada nas fases iniciais da execução seguinte. Ou seja: o que a ferramenta aprendeu ontem vira contexto automático amanhã.
-
-Isso é documentação viva de verdade. Não uma spec congelada para ser venerada na parede, mas uma spec que regenera. Um mecanismo que acumula aprendizado e reduz, execução após execução, a quantidade de intenção que precisa ser reexplicada.
-
-E não é teoria de slide. Aqui está uma execução real rodando no terminal:
+E cada execução realimenta a próxima: aprendizados e ADRs gravados no repositório, reinjetados no round seguinte. Não uma spec congelada na parede — uma spec que regenera.
 
 ![Execução real do dev-squad no terminal: o pipeline de seis fases à esquerda, os pares actor/critic rodando em paralelo por tarefa, e o histórico de commits à esquerda mostrando uma tarefa por commit.](../../../assets/dev-squad-terminal.png)
 
-*Uma execução de sete tarefas: 15 de 16 agentes concluídos em pouco menos de 25 minutos. À esquerda, as fases (Scout 2/2, Spec 2/2, Decompose 5/5, Execute 6/7, Verify). Dentro do **Execute**, os pares `actor-bN-TN` / `critic-bN-TN` rodam em paralelo, cada tarefa em seu próprio worktree git isolado, e cada lote é mergeado assim que converge. Repare nos modelos: Opus na crítica, Sonnet na implementação e nos merges — papéis diferentes, ferramentas diferentes. À direita, o custo real de cada agente em tokens. E, no canto esquerdo, o grafo de commits mostra o resultado: uma tarefa por commit, mergeada de volta uma a uma.*
+*Uma execução real: 15 de 16 agentes concluídos em pouco menos de 25 minutos, Opus na crítica e Sonnet na implementação, cada tarefa em seu próprio worktree git — uma tarefa, um commit.*
 
-O que o dev-squad faz, no fundo, é se recusar a escolher entre as duas tribos. Para isso, ele separa duas coisas que o debate sempre tratou como uma só: *como você pede* e *quanto rigor o pedido precisa ter*.
+No fundo, o dev-squad se recusa a escolher entre as duas tribos. Ele separa duas coisas que o debate sempre tratou como uma só: *como você pede* e *quanto rigor o pedido precisa ter*. Você continua conversando com a máquina em linguagem natural, no modo vibe — mas, antes de virar código, o que você pediu atravessa um portão automático, cada vez mais esperto a cada execução. A liberdade fica na largada; o rigor fica no portão.
 
-Você continua conversando com a máquina em linguagem natural, no modo exploratório e intuitivo do vibe — sem precisar sentar antes para redigir um documento denso. Mas, antes de virar código, aquilo que você pediu tem que atravessar um portão. E é no portão que a disciplina dos spec-driven é cobrada: substância, fidelidade, vigilância contra a divergência. O que a outra tribo exigia de você na entrada, escrevendo tudo à mão, o dev-squad passa a exigir da própria spec na passagem — automaticamente. E, como ele aprende a cada volta, o portão vai ficando mais esperto. A liberdade do vibe fica na largada. O rigor da especificação fica no portão.
-
-Pessoalmente entendo o dev-squad como a união do melhor dos dois mundos. É a aposta de autonomia do Rafael e o meu pragmatismo de especificação manual convergindo dentro da mesma ferramenta. Nenhum de nós dois abriu mão do seu lado; mas é a ferramenta que aprendeu a sustentar os dois ao mesmo tempo.
-
-E é por isso que ver os harnesses comerciais chegarem ao mesmo lugar não me incomoda — me tranquiliza. O valor do dev-squad, para mim, nunca esteve em ser único. Esteve em nos deixar viver essa arquitetura por dentro, erro a erro, antes de ela virar mainstream. A tese se sustenta não porque uma ferramenta a implementou, mas porque várias, partindo de pontos diferentes, foram empurradas para ela.
+É a aposta de autonomia do Rafael e o meu pragmatismo de especificação manual convergindo dentro da mesma ferramenta — nenhum dos dois abriu mão do seu lado, mas a ferramenta aprendeu a sustentar os dois ao mesmo tempo. E é por isso que ver os harnesses comerciais chegarem ao mesmo lugar não me incomoda — me tranquiliza. A tese se sustenta não porque uma ferramenta a implementou, mas porque várias, partindo de pontos diferentes, foram empurradas para ela.
 
 ## O ponto de equilíbrio
 
